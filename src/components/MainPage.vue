@@ -28,7 +28,7 @@
                 
                 <div class="note-content">
                     <h3 class="note-title">{{ selectedNote.name }}</h3>
-                    <widgetItem
+                    <WidgetItem
                         v-for="widget in selectedNote.widgetList"
                         v-bind:key="widget.id"
                         v-bind:widget="widget"
@@ -40,7 +40,7 @@
                         @input=" widget.text = $event"
                         @typeWidget=" widget.type = $event"
                         @inputWidget=" widget.text = $event">   
-                    </widgetItem>
+                    </WidgetItem>
                     <button class="transparent">
                         <i class="fas fa-plus-square"></i>ウィジェットを追加する
                     </button>
@@ -60,6 +60,10 @@ export default {
             noteList: [],
             selectedNote: null,
         }
+    },
+    components: {
+        NoteItem,
+        WidgetItem
     },
     methods: {
         onAddNoteCommon: function(targetList, layer, index){
@@ -161,10 +165,7 @@ export default {
     },
         
     },
-    components:{
-        NoteItem,
-        WidgetItem
-    }
+
 
 }
 </script>

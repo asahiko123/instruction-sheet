@@ -1,5 +1,7 @@
 <template>
-    tableItem.vue
+    <div class="table">
+        <p>tableItem.vue</p>
+    </div>
 </template>
 
 <script>

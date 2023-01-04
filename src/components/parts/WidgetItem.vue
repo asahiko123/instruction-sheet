@@ -30,9 +30,7 @@
                 />
             </template>
             <template v-if="widget.type == 'table'">
-                <input   
-                    class="table transparent"
-                    placeholder="テーブル"/>
+               <TableItem></TableItem>
             </template>
             <div v-show="widget.mouseover" class="widget-action">
                 <div class="button-icon" @click="onClickChildWidget(widget)">
@@ -73,6 +71,7 @@
 </template>
 
 <script>
+import TableItem from './TableItem.vue'
 export default{
     name: 'WidgetItem',
     props:[
@@ -80,6 +79,9 @@ export default{
         'parentWidget',
         'layer',
     ],
+    components: {
+        TableItem
+    },
     methods: {
         onMouseOver : function(){
             this.$emit('mouseover',true);
