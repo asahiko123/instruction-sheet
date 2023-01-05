@@ -172,4 +172,10 @@ export default{
 .child-widget {
   padding-left: 10px;
 }
+
+@media print{
+    .widget-action {
+        display: none;
+    }
+}
 </style>

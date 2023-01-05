@@ -43,7 +43,7 @@
                             @inputWidget=" widget.text = $event">   
                         </WidgetItem>
                     </draggable>
-                    <button class="transparent" @click="onClickButtonAddWidget">
+                    <button class="addWidget transparent" @click="onClickButtonAddWidget">
                         <i class="fas fa-plus-square"></i>ウィジェットを追加する
                     </button>
                 </div>
@@ -208,5 +208,11 @@ export default {
     }
     }
 }
+
+@media print {
+        .left-menu,.addWidget{
+            display: none;
+        }
+    }
 
 </style>
