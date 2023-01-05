@@ -115,6 +115,10 @@ export default{
         'widget.text': function(){
             this.resizeCodeTextarea();
         }
+    },
+    mounted: function(){
+        const input = this.$refs[`widget-${this.widget.type}-${this.widget.id}`];
+        input.focus();
     }
 }
 
