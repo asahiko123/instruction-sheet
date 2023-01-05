@@ -28,20 +28,22 @@
                 
                 <div class="note-content">
                     <h3 class="note-title">{{ selectedNote.name }}</h3>
-                    <WidgetItem
-                        v-for="widget in selectedNote.widgetList"
-                        v-bind:key="widget.id"
-                        v-bind:widget="widget"
-                        v-bind:layer="1"
-                        @delete="onDeleteWidget"
-                        @addChild="onAddChildWidget"
-                        @addWidgetAfter="onAddWidgetAfter"
-                        @mouseover=" widget.mouseover = $event"
-                        @input=" widget.text = $event"
-                        @typeWidget=" widget.type = $event"
-                        @inputWidget=" widget.text = $event">   
-                    </WidgetItem>
-                    <button class="transparent">
+                    <draggable v-bind:list="selectedNote.widgetList" group="widgets">
+                        <WidgetItem
+                            v-for="widget in selectedNote.widgetList"
+                            v-bind:key="widget.id"
+                            v-bind:widget="widget"
+                            v-bind:layer="1"
+                            @delete="onDeleteWidget"
+                            @addChild="onAddChildWidget"
+                            @addWidgetAfter="onAddWidgetAfter"
+                            @mouseover=" widget.mouseover = $event"
+                            @input=" widget.text = $event"
+                            @typeWidget=" widget.type = $event"
+                            @inputWidget=" widget.text = $event">   
+                        </WidgetItem>
+                    </draggable>
+                    <button class="transparent" @click="onClickButtonAddWidget">
                         <i class="fas fa-plus-square"></i>ウィジェットを追加する
                     </button>
                 </div>
@@ -53,6 +55,7 @@
 <script>
 import NoteItem from '@/components/parts/NoteItem.vue'
 import WidgetItem from '@/components/parts/WidgetItem.vue'
+import draggable from 'vuedraggable'
 export default {
     
     data(){
@@ -63,7 +66,8 @@ export default {
     },
     components: {
         NoteItem,
-        WidgetItem
+        WidgetItem,
+        draggable
     },
     methods: {
         onAddNoteCommon: function(targetList, layer, index){
@@ -133,7 +137,7 @@ export default {
             layer = layer || 1;
             const widget = {
                 id: new Date().getTime().toString(16),
-                type: 'heading',
+                type: layer === 1 ? 'heading' : 'body',
                 text: '',
                 mouseover: false,
                 children: [],
@@ -162,6 +166,11 @@ export default {
         const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
         const index = targetList.indexOf(widget);
         targetList.splice(index, 1);
+
+        const focusWidget = index === 0 ? parentWidget : targetList[index - 1];
+        if(focusWidget != null){
+            focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
+        }
     },
         
     },
