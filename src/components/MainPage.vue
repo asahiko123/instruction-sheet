@@ -38,7 +38,8 @@
                             @addChild="onAddChildWidget"
                             @addWidgetAfter="onAddWidgetAfter"
                             @inputWidget=" widget.text = $event"
-                            @mouseover= "widget.mouseover = $event">   
+                            @mouseover= "widget.mouseover = $event"
+                            @typeWidget=" widget.type = $event">   
                         </WidgetItem>
                     </draggable>
                     <button class="addWidget transparent" @click="onClickButtonAddWidget">

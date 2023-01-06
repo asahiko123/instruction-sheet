@@ -64,7 +64,9 @@
             @delete="onClickDelete"
             @addChild="onClickChildWidget"
             @addWidgetAfter="onClickAddWidgetAfter"
+            @inputWidget=" childWidget.text = $event"
             @mouseover= "childWidget.mouseover = $event"
+            @typeWidget=" childWidget.type = $event"
             >
 
             </WidgetItem>
