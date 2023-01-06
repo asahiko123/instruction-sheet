@@ -32,8 +32,8 @@ export default{
             {
                 id: new Date().getTime().toString(16),
                 table_cells:[
-                    { cell_type: "TH", id: new Date().getTime().toString(16)},
                     { cell_type: "TD", id: new Date().getTime().toString(16)},
+                    { cell_type: "TH", id: new Date().getTime().toString(16)},
                     { cell_type: "TH", id: new Date().getTime().toString(16)},
                     { cell_type: "TD", id: new Date().getTime().toString(16)}
                 ]
@@ -52,17 +52,21 @@ table{
     width: 100%;
     td{
         width: 80%;
-        border: thin solid rgba(0,0,0,0.12);
+        border: none;
     }
     th{
         width: 20%;
         background: #ccc;
-        border: thin solid rgba(0,0,0,0.12);
+        border: none;
+    }
+    .cellinput{
+        border: none;
     }
     .cellinput-wrapper{
         display: flex;
         flex-direction: row;
         height: 30px;
+        border: thin solid rgba(0,0,0,0.12);
     }
     .cellinput{
         width: 100%;

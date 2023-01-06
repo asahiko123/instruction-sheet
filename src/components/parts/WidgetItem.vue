@@ -13,7 +13,7 @@
                 />
             </template>
             <template v-if="widget.type == 'body'">
-                <input  
+                □<input  
                     v-bind:value="widget.text" @input="$emit('inputWidget',$event.target.value)" 
                     v-bind:ref="'widget-body-' + widget.id"
                     class="body transparent"
