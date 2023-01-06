@@ -60,10 +60,12 @@
             v-bind:widget="childWidget"
             v-bind:parentWidget="widget"
             v-bind:key="childWidget.id"
+            v-bind:layer="layer + 1"
             @delete="onClickDelete"
             @addChild="onClickChildWidget"
             @addWidgetAfter="onClickAddWidgetAfter"
-            @input="childWidget.text = $event">
+            @mouseover= "childWidget.mouseover = $event"
+            >
 
             </WidgetItem>
         </div>
