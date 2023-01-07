@@ -3,11 +3,19 @@
         <div v-for="tr in rows" :key="tr.id" >
             <tr v-for="cell in tr.table_cells" :key="cell.id" class="table-wrapper">
                 <div class="cellinput-wrapper">
-                    <th>{{ cell.cell_type_front }}</th>
+                    <th>
+                        <template>
+                            <input type="text" class="headerInput" v-bind:value="cell.cell_type_front">
+                        </template>
+                    </th>
                     <td class="cellinput"><input type="text" class="cellinputText"></td>
                 </div>
                 <div class="cellinput-wrapper">
-                    <th>{{ cell.cell_type_back }}</th>
+                    <th>
+                        <template>
+                            <input type="text" class="headerInput" v-bind:value="cell.cell_type_back">
+                        </template>
+                    </th>
                     <td class="cellinput"><input type="text" class="cellinputText"></td>
                 </div>
             </tr>
@@ -66,6 +74,10 @@ table{
         flex-direction: row;
         height: 30px;
         border: thin solid rgba(0,0,0,0.12);
+    }
+    .headerInput{
+        border: none;
+        background: rgba(195, 182, 182, 0.12);
     }
     input.cellinputText{
         width: 100%;
