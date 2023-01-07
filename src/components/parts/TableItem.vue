@@ -1,25 +1,17 @@
 <template>
     <table>
-        <template>
-            <tr v-for="tr in rows" :key="tr.id">
-                <template>
-                    <div class="cellinput-wrapper" v-for="cell in tr.table_cells" :key="cell.id">
-                        <th>
-                            <p>{{ cell.cell_type}}</p>
-                        </th>
-                        <td>
-                            <input type="text" class="cellinput">
-                        </td>
-                        <th>
-                            <p>{{ cell.cell_type}}</p>
-                        </th>
-                        <td>
-                            <input type="text" class="cellinput">
-                        </td>
-                    </div>
-                </template>
+        <div v-for="tr in rows" :key="tr.id" >
+            <tr v-for="cell in tr.table_cells" :key="cell.id" class="table-wrapper">
+                <div class="cellinput-wrapper">
+                    <th>{{ cell.cell_type_front }}</th>
+                    <td class="cellinput"><input type="text" class="cellinputText"></td>
+                </div>
+                <div class="cellinput-wrapper">
+                    <th>{{ cell.cell_type_back }}</th>
+                    <td class="cellinput"><input type="text" class="cellinputText"></td>
+                </div>
             </tr>
-        </template>
+        </div>
     </table>
 </template>
 
@@ -32,13 +24,13 @@ export default{
             {
                 id: new Date().getTime().toString(16),
                 table_cells:[
-                    { cell_type: "TD", id: new Date().getTime().toString(16)},
-                    { cell_type: "TH", id: new Date().getTime().toString(16)},
-                    { cell_type: "TH", id: new Date().getTime().toString(16)},
-                    { cell_type: "TD", id: new Date().getTime().toString(16)}
+                    { cell_type_front: "TD",cell_type_back: "TD", id: new Date().getTime().toString(16)},
+                    { cell_type_front: "TH",cell_type_back: "TH", id: new Date().getTime().toString(16)},
+                    { cell_type_front: "TH",cell_type_back: "TH",id: new Date().getTime().toString(16)},
+                    { cell_type_front: "TD",cell_type_back: "TH", id: new Date().getTime().toString(16)}
                 ]
 
-            }
+            },
             ]
         }
         
@@ -51,24 +43,31 @@ export default{
 table{
     width: 100%;
     td{
-        width: 80%;
-        border: none;
+        width: 60%;
+        border: thin solid rgba(195, 182, 182, 0.12);
     }
     th{
-        width: 20%;
+        width: 40%;
         background: #ccc;
-        border: none;
+        border: thin solid rgba(195, 182, 182, 0.12);
+    }
+    .table-wrapper{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
     }
     .cellinput{
         border: none;
+        width: 100%;
     }
     .cellinput-wrapper{
+        width: 50%;
         display: flex;
         flex-direction: row;
         height: 30px;
         border: thin solid rgba(0,0,0,0.12);
     }
-    .cellinput{
+    input.cellinputText{
         width: 100%;
     }
 }

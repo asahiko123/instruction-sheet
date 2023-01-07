@@ -179,6 +179,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .main-page{
     display: flex;
     height: calc(100vh - 60px);
