@@ -5,18 +5,44 @@
                 <div class="cellinput-wrapper">
                     <th>
                         <template>
-                            <input type="text" class="headerInput" v-bind:value="cell.cell_type_front">
+                            <input 
+                                type="text" 
+                                class="headerInput" 
+                                v-model="cell.cell_type_th_front"
+                                >
                         </template>
                     </th>
-                    <td class="cellinput"><input type="text" class="cellinputText"></td>
+                    <td class="cellinput">
+                        <template>
+                            <input 
+                                type="text" 
+                                class="cellinputText" 
+                                v-model="cell.cell_type_td_front"
+                                >
+                        </template>
+                    </td>
+                    <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
                 </div>
                 <div class="cellinput-wrapper">
                     <th>
                         <template>
-                            <input type="text" class="headerInput" v-bind:value="cell.cell_type_back">
+                            <input 
+                            type="text" 
+                            class="headerInput" 
+                            v-model="cell.cell_type_th_back"
+                            >
                         </template>
                     </th>
-                    <td class="cellinput"><input type="text" class="cellinputText"></td>
+                    <td class="cellinput">
+                        <template>
+                            <input 
+                            type="text" 
+                            class="cellinputText" 
+                            v-model="cell.cell_type_td_back"
+                            >
+                        </template>
+                    </td>
+                    <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
                 </div>
             </tr>
         </div>
@@ -26,16 +52,19 @@
 <script>
 export default{
     name: 'TableItem',
+    props: [
+        'widget'
+    ],
     data(){
         return{
             rows: [
             {
-                id: new Date().getTime().toString(16),
+                id: new Date().getTime().toString(16)+'0',
                 table_cells:[
-                    { cell_type_front: "TD",cell_type_back: "TD", id: new Date().getTime().toString(16)},
-                    { cell_type_front: "TH",cell_type_back: "TH", id: new Date().getTime().toString(16)},
-                    { cell_type_front: "TH",cell_type_back: "TH",id: new Date().getTime().toString(16)},
-                    { cell_type_front: "TD",cell_type_back: "TH", id: new Date().getTime().toString(16)}
+                    { cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '', id: new Date().getTime().toString(16) + '1'},
+                    { cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '', id: new Date().getTime().toString(16) + '2'},
+                    { cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '',id: new Date().getTime().toString(16) + '3'},
+                    { cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '', id: new Date().getTime().toString(16) + '4'}
                 ]
 
             },

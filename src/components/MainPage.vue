@@ -1,6 +1,10 @@
 <template>
     <div class="main-page">
         <div class="left-menu" @click.self="onEditNoteEnd()">
+
+            <button class="transparent save" @click="onClickButtonSave">
+                <i class="fas fa-save"></i>内容を保存する
+            </button>
             <NoteItem
                 v-for="note in noteList"
                 v-bind:note="note"
@@ -67,6 +71,12 @@ export default {
         NoteItem,
         WidgetItem,
         draggable
+    },
+    created: function(){
+        const localData = localStorage.getItem('noteItem');
+        if(localData != null){
+            this.noteList = JSON.parse(localData);
+        }
     },
     methods: {
         onAddNoteCommon: function(targetList, layer, index){
@@ -167,10 +177,19 @@ export default {
         targetList.splice(index, 1);
 
         const focusWidget = index === 0 ? parentWidget : targetList[index - 1];
-        if(focusWidget != null){
-            focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
-        }
-    },
+            if(focusWidget != null){
+                focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
+            }
+        },
+        onClickButtonSave: function(){
+            localStorage.setItem('noteItem',JSON.stringify(this.noteList));
+            this.$toasted.show('マニュアルを保存しました',{
+                position: 'top-left',
+                duration: 1000,
+                type: 'success'
+            });
+            
+        },
         
     },
 
@@ -187,6 +206,10 @@ export default {
     .left-menu{
         width: 350px;
         background-color: #f7f6f3;
+
+        .save{
+            width: 100%;
+        }
 
     }
     .right-view{
