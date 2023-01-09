@@ -152,6 +152,7 @@ export default {
                 children: [],
                 layer: layer,
             };
+
             if(index == null){
                 targetList.push(widget);
             }else{

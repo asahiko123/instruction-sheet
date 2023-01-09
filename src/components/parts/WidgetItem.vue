@@ -29,7 +29,8 @@
                     placeholder="コード"
                 />
             </template>
-            <template v-if="widget.type == 'table'">
+            <template 
+                v-if="widget.type == 'table'">
                <TableItem></TableItem>
             </template>
             <div v-show="widget.mouseover" class="widget-action">
