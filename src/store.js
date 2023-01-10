@@ -21,10 +21,9 @@ export default new Vuex.Store({
         ]
     },
     getters: {
-        cell_type_th_front: state => state.rows.table_cells.cell_type_th_front,
-        cell_type_th_back: state => state.rows.table_cells.cell_type_th_back,
-        cell_type_td_front: state => state.rows.table_cells.cell_type_td_front,
-        cell_type_td_back: state => state.rows.table_cells.cell_type_td_back,
+        getThFront: state => {
+            return state.rows.filter(row => row.table_cells).filter(table_cell => table_cell.cell_type_th_front);
+        }
     },
     mutations: {
         setFirstRow(state, payload){
