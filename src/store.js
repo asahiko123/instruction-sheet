@@ -27,50 +27,41 @@ export default new Vuex.Store({
     },
     mutations: {
         setFirstRow(state, payload){
-            
+            console.log('saveFirst');
+            console.log(payload.val);
             state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
             state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
-            this.save(state);
+            
         },
         setSecondRow(state, payload){
+            console.log('saveSecond');
+            state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
+            state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
+            state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
+            state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
             
-            state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
-            state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
-            state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
-            state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
-            this.save(state);
         },
-        setTdFront(state, payload){
+        setThirdRow(state, payload){
+            console.log('saveThird');
+            state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
+            state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
+            state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
+            state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
             
-            state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
-            state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
-            state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
-            state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
-            this.save(state);
         },
-        setTdBack(state, payload){
+        setForthRow(state, payload){
+            console.log('saveForth');
             state.rows.table_cells[payload.index].cell_type_th_front = payload.val;
             state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_back = payload.val;
-            this.save(state);
+            
         },
         save(state){
             console.log('save');
-            localStorage.setItem('store',JSON.stringify(state));
-        },
-        load(state){
-            if(localStorage.getItem('store')){
-                const store = JSON.parse(localStorage.getItem('store'));
-                this.replaceState(Object.assign(state,store));
-            }
-        }
-    },
-    actions: {
-        loading({ commit }){
-        commit('load');
+            localStorage.setItem('table',JSON.stringify(state));
         }
     }
     

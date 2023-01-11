@@ -57,6 +57,7 @@
 
 <script>
 import NoteItem from '@/components/parts/NoteItem.vue'
+import store from '../store'
 import WidgetItem from '@/components/parts/WidgetItem.vue'
 import draggable from 'vuedraggable'
 export default {
@@ -184,6 +185,7 @@ export default {
         },
         onClickButtonSave: function(){
             localStorage.setItem('noteItem',JSON.stringify(this.noteList));
+            localStorage.setItem('table',JSON.stringify(store.state)); 
             this.$toasted.show('マニュアルを保存しました',{
                 position: 'top-left',
                 duration: 1000,

@@ -76,28 +76,29 @@ export default{
     },
     methods: {
         onInput : function(index, val){
-            console.log('onInput');
-            if(index == 1){
-                console.log('1');
-                store.commit('setFirstRow',{index, val});
-            }else if(index == 2){
-                console.log('2');
-                store.commit('setSecondRow',{index, val});
-            }else if(index == 3){
-                console.log('3');
-                store.commit('setThirdRow',{index, val});
-            }else{
-                console.log('4');
-                store.commit('setForthRow',{index, val});
-            }
+                console.log('onInput');
+                if(index == 0){
+                    console.log('0');
+                    store.commit('setFirstRow',{index, val});
+                    
+                }else if(index == 1){
+                    console.log('1');
+                    store.commit('setSecondRow',{index, val});
+                }else if(index == 2){
+                    console.log('2');
+                    store.commit('setThirdRow',{index, val});
+                }else{
+                    console.log('3');
+                    store.commit('setForthRow',{index, val});
+                }
             
         }
     },
     computed: {
-        rows() {
+        rows(){
             return store.state.rows;
         }
-    }
+    },
 }
 </script>
 
