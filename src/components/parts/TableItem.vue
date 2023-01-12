@@ -74,6 +74,14 @@ export default{
         }
         
     },
+    created(){
+        const localDataTable = localStorage.getItem('table');
+        if(localDataTable != null){
+            console.log('created!')
+            store.replaceState(JSON.parse(localDataTable));
+
+        }
+    },
     methods: {
         onInput : function(index, val){
                 console.log('onInput');

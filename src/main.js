@@ -9,8 +9,5 @@ Vue.use(Toasted);
 
 new Vue({
   store,
-  beforeCreate(){
-    this.store.dispatch('loading');
-  },
   render: h => h(App),
 }).$mount('#app')

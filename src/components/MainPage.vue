@@ -75,9 +75,11 @@ export default {
     },
     created: function(){
         const localData = localStorage.getItem('noteItem');
+
         if(localData != null){
             this.noteList = JSON.parse(localData);
         }
+    
     },
     methods: {
         onAddNoteCommon: function(targetList, layer, index){
