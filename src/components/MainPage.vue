@@ -178,7 +178,12 @@ export default {
         onDeleteWidget : function(parentWidget, widget) {
         const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
         const index = targetList.indexOf(widget);
+        if(widget.type == "table"){
+            localStorage.removeItem('table');
+        }
         targetList.splice(index, 1);
+
+
 
         const focusWidget = index === 0 ? parentWidget : targetList[index - 1];
             if(focusWidget != null){
