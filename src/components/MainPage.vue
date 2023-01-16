@@ -180,6 +180,7 @@ export default {
         const index = targetList.indexOf(widget);
         if(widget.type == "table"){
             localStorage.removeItem('table');
+            store.commit('removeTable',store.state.rows);
         }
         targetList.splice(index, 1);
 

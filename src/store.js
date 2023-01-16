@@ -3,6 +3,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const initTable = {
+    cell_type_th_front: '',
+    cell_type_th_back: '',
+    cell_type_td_front: '',
+    cell_type_td_back: ''
+}
+
 export default new Vuex.Store({
     state: {
         id:  new Date().getTime().toString(16),
@@ -10,10 +17,10 @@ export default new Vuex.Store({
             {
                 id: new Date().getTime().toString(16) + '0',
                 table_cells:[
-                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '',id :new Date().getTime().toString(16) + '1'},
-                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '',id :new Date().getTime().toString(16) + '2'},
-                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '',id :new Date().getTime().toString(16) + '3'},
-                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: '',id :new Date().getTime().toString(16) + '4'},
+                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                    {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
                    
                 ]
 
@@ -62,7 +69,17 @@ export default new Vuex.Store({
         save(state){
             console.log('save');
             localStorage.setItem('table',JSON.stringify(state));
+        },
+        removeTable(rows){
+            console.log('remove');
+            for(let cells in rows){
+                for(let cell in cells.table_cells){
+                    console.log(cell);
+                    Object.assign(cell,initTable);
+                }
+            }
         }
+
     }
     
 })
