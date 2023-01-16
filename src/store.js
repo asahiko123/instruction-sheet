@@ -70,12 +70,12 @@ export default new Vuex.Store({
             console.log('save');
             localStorage.setItem('table',JSON.stringify(state));
         },
-        removeTable(rows){
-            console.log('remove');
-            for(let cells in rows){
-                for(let cell in cells.table_cells){
-                    console.log(cell);
-                    Object.assign(cell,initTable);
+        removeTable(state){
+            console.log(state.rows);
+            for(let cell of state.rows){
+                for(let cells of cell.table_cells){
+                    console.log(cells);
+                    Object.assign(cells,initTable);
                 }
             }
         }
