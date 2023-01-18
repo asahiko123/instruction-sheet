@@ -25,7 +25,9 @@ export default new Vuex.Store({
                 ]
 
             },
-        ]
+        ],
+        filePreview: '',
+
     },
     getters: {
         getThFront: state => {
@@ -52,6 +54,12 @@ export default new Vuex.Store({
                     Object.assign(cells,initTable);
                 }
             }
+        },
+        updateFilePreview(state,value){
+            state.filePreview = value;
+        },
+        removeFilePreview(state){
+            state.filePreview = '';
         }
 
     }

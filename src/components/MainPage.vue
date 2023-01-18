@@ -181,6 +181,8 @@ export default {
         if(widget.type == "table"){
             localStorage.removeItem('table');
             store.commit('removeTable',store.state);
+        }else if(widget.type == 'image'){
+            store.commit('removeFilePreview',store.state);
         }
         targetList.splice(index, 1);
 

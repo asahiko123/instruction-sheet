@@ -31,7 +31,13 @@
             </template>
             <template 
                 v-if="widget.type == 'table'">
-               <TableItem></TableItem>
+               <TableItem/>
+            </template>
+            <template v-if="widget.type == 'image'">
+                <div class="upload">
+                    <FilePreview/>
+                    <input type="file" @change="upload"/>
+                </div>
             </template>
             <div v-show="widget.mouseover" class="widget-action">
                 <div class="button-icon" @click="onClickChildWidget(widget)">
@@ -50,6 +56,7 @@
                         <a class="dropdown-item" @click="$emit('typeWidget','code')">ソースコード</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','body')">本文</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','table')">テーブル</a>
+                        <a class="dropdown-item" @click="$emit('typeWidget','image')">写真</a>
                     </div>
                 </div> 
             </div>
@@ -77,6 +84,8 @@
 
 <script>
 import TableItem from './TableItem.vue'
+import FilePreview from './FilePreview.vue'
+import store from '../../store'
 export default{
     name: 'WidgetItem',
     props:[
@@ -85,7 +94,8 @@ export default{
         'layer',
     ],
     components: {
-        TableItem
+        TableItem,
+        FilePreview,
     },
     methods: {
         onMouseOver : function(){
@@ -114,6 +124,18 @@ export default{
             promise.then(function(){
                 textarea.style.height = textarea.scrollHeight + 'px';
             });
+        },
+        upload(e){
+            let image = e.target.files[0];
+            let reader = new FileReader();
+            console.log(reader);
+
+            reader.readAsDataURL(image);
+            reader.onload = (e) =>{
+                let imageData = e.target.result;
+                console.log(imageData);
+                store.commit('updateFilePreview',imageData);
+            }
         }
     },
     watch: {
