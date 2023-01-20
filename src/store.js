@@ -27,6 +27,26 @@ export default new Vuex.Store({
             },
         ],
         filePreview: '',
+        noteList:[],
+        widgetList:[],
+        note:{
+            id: new Date().getTime().toString(16),
+            name : `新規ノート-${layer}-${targetList.length}`,
+            children: [],
+            mouseover: false,
+            editing: false,
+            selected: false,
+            layer: layer,
+            widgetList:[]
+        },
+        widget:{
+            id: new Date().getTime().toString(16),
+            type: null,
+            text: '',
+            mouseover: false,
+            children: [],
+            layer: null,
+        }
 
     },
     getters: {
@@ -41,7 +61,49 @@ export default new Vuex.Store({
             state.rows.table_cells[payload.index].cell_type_th_back = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_front = payload.val;
             state.rows.table_cells[payload.index].cell_type_td_back = payload.val;        
-        },     
+        },
+        setWidgetCommon(targetList,layer,index){
+
+            layer = layer || 1;
+            state.widget.id = new Date().getTime().toString(16);
+            state.widget.type = layer == 1 ? 'heading' : 'body';
+            state.widget.layer = layer;
+
+            if(index == null){
+                targetList.push(state.widget);
+            }else{
+                targetList.splice(index + 1,0,widget);
+            }
+
+        },
+        setNoteCommon(targetList, layer, index){
+
+            layer = layer || 1;
+            state.note.id = new Date().getTime().toString(16);
+            state.note.name = `新規ノート-${layer}-${targetList.length}`;
+            state.note.children = [],
+            state.note.mouseover = false,
+            state.note.editing = false,
+            state.noet.selected = false,
+            state.note.layer = null,
+            state.note.widgetList = []
+
+
+            this.setWidgetCommon(note.widgetList);
+
+            if(index == null){
+                targetList.push(state.note)
+            }else{
+                targetList.splice(index + 1, 0 , state.note);
+            }        
+        },
+        addNoteOnSameLayer(parentNote,note){
+            const targetList = parentNote == null ? state.noteList : parentNote.children;
+            const layer = parentNote == null ? 1 : state.note.layer;
+            const index = targetList.typeOf(note);
+
+            this.setNoteCommon(targetList, layer, index);
+        },
         save(state){
             console.log('save');
             localStorage.setItem('table',JSON.stringify(state));
