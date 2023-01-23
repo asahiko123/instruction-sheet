@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 
 Vue.use(Vuex);
 
@@ -61,6 +61,7 @@ export default new Vuex.Store({
 
                     },
                 ],
+                selected: false,
             });
 
             state.tableList[tableList.length - 1].table_cells[payload.index].cell_type_th_front = payload.val;
@@ -84,7 +85,9 @@ export default new Vuex.Store({
                         ]
 
                     },
+
                 ],
+                selected: false,
             });
 
         },
@@ -135,9 +138,9 @@ export default new Vuex.Store({
             localStorage.setItem('table',JSON.stringify(state));
         },
         removeTable(state){
-            console.log(state.rows);
-            for(let cell of state.rows){
-                for(let cells of cell.table_cells){
+            console.log(state.tableList);
+            for(let table in state.tableList){
+                for(let cells in table.rows){
                     console.log(cells);
                     Object.assign(cells,initTable);
                 }
@@ -148,6 +151,14 @@ export default new Vuex.Store({
         },
         removeFilePreview(state){
             state.filePreview = '';
+        },
+        onSelect(state,key){
+            console.log(key);
+            
+            let [{ selected }] = state.tableList.filter(({ id }) => id === key);
+            selected = true;
+            state.tableList.filter(({ id }) => id === key)[0]['selected'] = selected;
+            
         }
 
     }

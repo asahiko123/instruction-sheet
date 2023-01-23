@@ -1,6 +1,6 @@
 <template>
     <table>
-        <div v-for="tr in rows" :key="tr.id" >
+        <div v-for="tr in rows" :key="tr.id" @click="onSelect(tr.id)">
             <tr v-for="(cell,index) in tr.table_cells" :key="cell.id" class="table-wrapper">
                 <div class="cellinput-wrapper">
                     <th>
@@ -77,6 +77,9 @@ export default{
         onInput : function(index, val){
                 console.log('onInput');
                 store.commit('setTableRow',{index, val});
+        },
+        onSelect: function(key){
+            store.commit('onSelect',key);
         }
     },
     computed: {
