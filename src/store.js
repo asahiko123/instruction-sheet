@@ -35,9 +35,25 @@ export default new Vuex.Store({
             mouseover: false,
             children: [],
             layer: null,
-        }
+        },
+        initTable:
+            {
+                rows: [
+                    {
+                        id: new Date().getTime().toString(16),
+                        table_cells:[
+                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                        
+                        ]
 
-    },
+                    },
+                ],
+                selected: false,
+            }
+        },
     getters: {
         // getThFront: state => {
         //     return state.rows.filter(row => row.table_cells).filter(table_cell => table_cell.cell_type_th_front);

@@ -31,7 +31,7 @@
             </template>
             <template 
                 v-if="widget.type == 'table'">
-               <TableItem/>
+                    <TableItem/>
             </template>
             <template v-if="widget.type == 'image'">
                 <div class="upload">
@@ -136,17 +136,35 @@ export default{
                 console.log(imageData);
                 store.commit('updateFilePreview',imageData);
             }
+        },
+        rerender(){
+            this.$nextTick(() => {
+                this.$forceUpdate();
+            })
         }
     },
     watch: {
         'widget.text': function(){
             this.resizeCodeTextarea();
-        }
+        },
+        
     },
-    mounted: function(){
-        const input = this.$refs[`widget-${this.widget.type}-${this.widget.id}`];
-        input.focus();
+    computed:{
+        
+        tableList(){
+            console.log('tableList')
+            return store.state.tableList;
+        },
+        initTable(){
+            console.log('initTable')
+            return store.state.initTable;
+        }
+
     }
+    // mounted: function(){
+    //     const input = this.$refs[`widget-${this.widget.type}-${this.widget.id}`];
+    //     input.focus();
+    // }
 }
 
 </script>

@@ -1,7 +1,11 @@
 <template>
+    <div class="table-wrapper">
     <table>
-        <div v-for="tr in rows" :key="tr.id" @click="onSelect(tr.id)">
-            <tr v-for="(cell,index) in tr.table_cells" :key="cell.id" class="table-wrapper">
+        <div v-for="tr in table" :key="tr.id" @click="onSelect(tr.id)">
+            <div v-for="list in tr.rows" :key="list.id">
+                {{ list }}
+            <div v-for="cell in list.table_cells" :key="cell.id" class="table-wrapper">
+            
                 <div class="cellinput-wrapper">
                     <th>
                         <template>
@@ -48,22 +52,22 @@
                     </td>
                     <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
                 </div>
-            </tr>
+            
+            </div>
+            </div>
         </div>
     </table>
+    </div>
 </template>
 
 <script>
 import store from '../../store'
 export default{
     name: 'TableItem',
-    data(){
-        return{
-            
-
-        }
+    // props:[
+    //     'table',
         
-    },
+    // ],
     created(){
         store.commit('initTable');
         const localDataTable = localStorage.getItem('table');
@@ -82,11 +86,18 @@ export default{
             store.commit('onSelect',key);
         }
     },
-    computed: {
-        rows(){
-            return store.state.tableList[0].rows;
+    computed:{
+        
+        table(){
+            console.log(store.state.tableList)
+            return store.state.tableList;
+        },
+        initTable(){
+            console.log('initTable')
+            return store.state.initTable;
         }
-    },
+
+    }
 }
 </script>
 
