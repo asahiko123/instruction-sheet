@@ -1,7 +1,7 @@
 <template>
     <div class="table-wrapper">
-    <table>
-        <div v-for="tr in table" :key="tr.id" @click="onSelect(tr.id)">
+    <table v-if="table">
+        <div v-for="tr in table" :key="tr.id">
             <div v-for="list in tr.rows" :key="list.id">
                 {{ list }}
             <div v-for="cell in list.table_cells" :key="cell.id" class="table-wrapper">
@@ -57,6 +57,61 @@
             </div>
         </div>
     </table>
+    <table v-else>
+        <div v-for="list in initTable.rows" :key="list.id">
+                {{ "initTable" }}
+            <div v-for="cell in list.table_cells" :key="cell.id" class="table-wrapper">
+            
+                <div class="cellinput-wrapper">
+                    <th>
+                        <template>
+                            <input 
+                                type="text" 
+                                class="headerInput" 
+                                @change="onInput(index, $event.target.value)"
+                                v-model="cell.cell_type_th_front"
+                                >
+                        </template>
+                    </th>
+                    <td class="cellinput">
+                        <template>
+                            <input 
+                                type="text" 
+                                class="cellinputText" 
+                                @change="onInput(index, $event.target.value)"
+                                v-model="cell.cell_type_td_front"
+                            >
+                        </template>
+                    </td>
+                    <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
+                </div>
+                <div class="cellinput-wrapper">
+                    <th>
+                        <template>
+                            <input 
+                            type="text" 
+                            class="headerInput" 
+                            @change="onInput(index, $event.target.value)"
+                            v-model="cell.cell_type_th_back"
+                            >
+                        </template>
+                    </th>
+                    <td class="cellinput">
+                        <template>
+                            <input 
+                            type="text" 
+                            class="cellinputText" 
+                            @change="onInput(index, $event.target.value)"
+                            v-model="cell.cell_type_td_back"
+                            >
+                        </template>
+                    </td>
+                    <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
+                </div>
+            
+            </div>
+            </div>
+    </table>
     </div>
 </template>
 
@@ -79,21 +134,22 @@ export default{
     },
     methods: {
         onInput : function(index, val){
-                console.log('onInput');
+                console.log('cccccc');
                 store.commit('setTableRow',{index, val});
         },
         onSelect: function(key){
+            console.log('ccc')
             store.commit('onSelect',key);
         }
     },
     computed:{
         
         table(){
-            console.log(store.state.tableList)
+            console.log('cc')
             return store.state.tableList;
         },
         initTable(){
-            console.log('initTable')
+            console.log('cccc')
             return store.state.initTable;
         }
 

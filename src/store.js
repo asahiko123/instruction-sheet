@@ -13,11 +13,14 @@ const initTable = {
 export default new Vuex.Store({
     state: {
         
-
+        id: new Date().getTime().toString(16),
         tableList:[],
         filePreview: '',
         noteList:[],
         widgetList:[],
+        table:{
+
+        },
         note:{
             id: new Date().getTime().toString(16),
             name : null,
@@ -62,23 +65,23 @@ export default new Vuex.Store({
     mutations: {
         setTableRow(state, payload){
             console.log(payload);
-
-            state.tableList.push({
-                rows: [
-                    {
-                        id: new Date().getTime().toString(16),
-                        table_cells:[
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+            console.log('ggggg');
+            // state.tableList.push({
+            //     rows: [
+            //         {
+            //             id: new Date().getTime().toString(16),
+            //             table_cells:[
+            //                 {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+            //                 {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+            //                 {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+            //                 {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
                         
-                        ]
+            //             ]
 
-                    },
-                ],
-                selected: false,
-            });
+            //         },
+            //     ],
+            //     selected: false,
+            // });
 
             state.tableList[tableList.length - 1].table_cells[payload.index].cell_type_th_front = payload.val;
             state.tableList[tableList.length - 1].table_cells[payload.index].cell_type_th_back = payload.val;
@@ -168,14 +171,6 @@ export default new Vuex.Store({
         removeFilePreview(state){
             state.filePreview = '';
         },
-        onSelect(state,key){
-            console.log(key);
-            
-            let [{ selected }] = state.tableList.filter(({ id }) => id === key);
-            selected = true;
-            state.tableList.filter(({ id }) => id === key)[0]['selected'] = selected;
-            
-        }
 
     }
     

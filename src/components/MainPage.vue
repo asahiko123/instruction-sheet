@@ -83,6 +83,7 @@ export default {
     },
     methods: {
         onAddNoteCommon: function(targetList, layer, index){
+            console.log('aaaa')
             layer = layer || 1
             const note = {
                 id: new Date().getTime().toString(16),
@@ -103,20 +104,24 @@ export default {
             }
         },
         addNoteOnSameLayer: function(parentNote, note){
+            console.log('aaaa')
             const targetList = parentNote == null ? this.noteList : parentNote.children;
             const layer = parentNote == null ? 1 : note.layer;
             const index = targetList.indexOf(note);
             this.onAddNoteCommon(targetList, layer, index);
         },
         onClickButtonAdd: function(){
+            console.log('aaaa')
             this.onAddNoteCommon(this.noteList);
         },
         onDeleteNote: function(parentNote, note){
+            console.log('aaaa')
             const targetList = parentNote == null ? this.noteList : parentNote.children;
             const index = targetList.indexOf(note); 
             targetList.splice(index,1);
         },
         onSelectNote: function(targetNote){
+            console.log('aaaa')
             const updateSelectStatus = function(targetNote,noteList){
                 for(let note of noteList){
                     note.selected = (note.id === targetNote.id);
@@ -129,9 +134,11 @@ export default {
 
         },
         onAddChildNote: function(note){
+            console.log('aaaa')
             this.onAddNoteCommon(note.children, note.layer + 1 );
         },
         onEditNoteStart: function(editNote, parentNote){
+            console.log('aaaa')
             const targetList = parentNote == null ? this.noteList : parentNote.children;
             for(let note of targetList){
                 note.editing = (note.id === editNote.id);
@@ -139,6 +146,7 @@ export default {
             }
         },
         onEditNoteEnd: function(parentNote){
+            console.log('aaaa')
             const targetList = parentNote == null ? this.noteList : parentNote.children;
             for(let note of targetList){
                 note.editing = false;
@@ -146,6 +154,7 @@ export default {
             }
         },
         onAddWidgetCommon: function(targetList, layer, index){
+            console.log('addWidget')
             layer = layer || 1;
             const widget = {
                 id: new Date().getTime().toString(16),
@@ -163,12 +172,15 @@ export default {
             }
         },
         onClickButtonAddWidget: function(){
+            console.log('aaaa')
             this.onAddWidgetCommon(this.selectedNote.widgetList);
         },
         onAddChildWidget: function(widget){
+            console.log('aaaa')
             this.onAddWidgetCommon(widget.children, widget.layer + 1);
         },
         onAddWidgetAfter: function(parentWidget, note){
+            console.log('aaaa')
             console.log('test');
             const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
             const layer = parentWidget == null ? null : parentWidget.layer + 1;
@@ -176,6 +188,7 @@ export default {
             this.onAddWidgetCommon(targetList, layer, index);
         },
         onDeleteWidget : function(parentWidget, widget) {
+            console.log('aaaa')
         const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
         const index = targetList.indexOf(widget);
         if(widget.type == "table"){
@@ -194,8 +207,9 @@ export default {
             }
         },
         onClickButtonSave: function(){
+            console.log('aaaa')
             localStorage.setItem('noteItem',JSON.stringify(this.noteList));
-            localStorage.setItem('table',JSON.stringify(store.state)); 
+            localStorage.setItem(`table_${store.state.id}`,JSON.stringify(store.state.tableList)); 
             this.$toasted.show('マニュアルを保存しました',{
                 position: 'top-left',
                 duration: 1000,
