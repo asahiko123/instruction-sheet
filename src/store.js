@@ -3,13 +3,6 @@ import Vuex, { Store } from 'vuex'
 
 Vue.use(Vuex);
 
-const initTable = {
-    cell_type_th_front: '',
-    cell_type_th_back: '',
-    cell_type_td_front: '',
-    cell_type_td_back: ''
-}
-
 export default new Vuex.Store({
     state: {
         
@@ -39,8 +32,9 @@ export default new Vuex.Store({
             children: [],
             layer: null,
         },
-        initTable:
+        table:
             {
+                id : new Date().getTime().toString(16) + new Date().getSeconds().toString(16),
                 rows: [
                     {
                         id: new Date().getTime().toString(16),
@@ -88,27 +82,8 @@ export default new Vuex.Store({
             state.tableList[tableList.length - 1].table_cells[payload.index].cell_type_td_front = payload.val;
             state.tableList[tableList.length - 1].table_cells[payload.index].cell_type_td_back = payload.val;
         },
-        initTable(state){
-
-            state.tableList.push({
-                id:  new Date().getTime().toString(16),
-                rows: [
-                    {
-                        id: new Date().getTime().toString(16),
-                        table_cells:[
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                        
-                        ]
-
-                    },
-
-                ],
-                selected: false,
-            });
-
+        addTable(state){
+            state.tableList.push(state.table);
         },
         // setWidgetCommon(targetList,layer,index){
 

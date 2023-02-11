@@ -144,11 +144,6 @@ export default{
                 store.commit('updateFilePreview',imageData);
             }
         },
-        // rerender(){
-        //     this.$nextTick(() => {
-        //         this.$forceUpdate();
-        //     })
-        // }
     },
     watch: {
         'widget.text': function(){
@@ -156,22 +151,10 @@ export default{
         },
         
     },
-    // computed:{
+    computed:{
         
-    //     tableList(){
-    //         console.log('tableList')
-    //         return store.state.tableList;
-    //     },
-    //     initTable(){
-    //         console.log('initTable')
-    //         return store.state.initTable;
-    //     }
-
-    // }
-    // mounted: function(){
-    //     const input = this.$refs[`widget-${this.widget.type}-${this.widget.id}`];
-    //     input.focus();
-    // }
+    
+    }
 }
 
 </script>
