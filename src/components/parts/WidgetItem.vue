@@ -31,7 +31,12 @@
             </template>
             <template 
                 v-if="widget.type == 'table'">
-                    <TableItem/>
+                    <TableItem
+                        @inputCell_Th_Front="table.rows.table_cells.table_type_th_front = $event"
+                        @inputCell_Th_Back="table.rows.table_cells.table_type_th_back = $event"
+                        @inputCell_Td_Front="table.rows.table_cells.table_type_td_front = $event"
+                        @inputCell_Td_Back="table.rows.table_cells.table_type_td_back = $event"
+                    />
             </template>
             <template v-if="widget.type == 'image'">
                 <div class="upload">
@@ -88,6 +93,11 @@ import FilePreview from './FilePreview.vue'
 import store from '../../store'
 export default{
     name: 'WidgetItem',
+    data(){
+        return {
+            tableList:[]
+        }
+    },
     props:[
         'widget',
         'parentWidget',
@@ -144,6 +154,26 @@ export default{
                 store.commit('updateFilePreview',imageData);
             }
         },
+        onAddTableCommon(tableList){
+            const table = {
+                id : new Date().getTime().toString(16) + new Date().getSeconds().toString(16),
+                rows: [
+                    {
+                        table_cells:[
+                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
+                        
+                        ]
+
+                    },
+                ],
+                selected: false,
+            }
+
+            tableList.push(table);
+        }
     },
     watch: {
         'widget.text': function(){

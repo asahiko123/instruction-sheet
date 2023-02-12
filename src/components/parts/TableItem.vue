@@ -1,29 +1,22 @@
 <template>
     <div class="table-wrapper">
     <table>
-        <div v-for="tr in table" :key="tr.id">
-            <div v-for="list in tr.rows" :key="list.id">
-                {{ list }}
-            <div v-for="cell in list.table_cells" :key="cell.id" class="table-wrapper">
+            <div class="table-wrapper">
             
                 <div class="cellinput-wrapper">
                     <th>
                         <template>
                             <input 
-                                type="text" 
-                                class="headerInput" 
-                                @change="onInput(index, $event.target.value)"
-                                v-model="cell.cell_type_th_front"
+                                v-bind:value="table.rows.table_cells.cell_type_th_front"
+                                @input="$emit('inputCell_Th_Front',$event.target.value)"
                                 >
                         </template>
                     </th>
                     <td class="cellinput">
                         <template>
                             <input 
-                                type="text" 
-                                class="cellinputText" 
-                                @change="onInput(index, $event.target.value)"
-                                v-model="cell.cell_type_td_front"
+                                v-bind:value="table.rows.table_cells.cell_type_td_front"
+                                @input="$emit('inputCell_Td_Front',$event.target.value)"
                             >
                         </template>
                     </td>
@@ -33,20 +26,16 @@
                     <th>
                         <template>
                             <input 
-                            type="text" 
-                            class="headerInput" 
-                            @change="onInput(index, $event.target.value)"
-                            v-model="cell.cell_type_th_back"
+                                v-bind:value="table.rows.table_cells.cell_type_th_back"
+                                @input="$emit('inputCell_Th_Back',$event.target.value)"
                             >
                         </template>
                     </th>
                     <td class="cellinput">
                         <template>
                             <input 
-                            type="text" 
-                            class="cellinputText" 
-                            @change="onInput(index, $event.target.value)"
-                            v-model="cell.cell_type_td_back"
+                                v-bind:value="table.rows.table_cells.cell_type_td_back"
+                                @input="$emit('inputCell_Td_Back',$event.target.value)"
                             >
                         </template>
                     </td>
@@ -54,21 +43,19 @@
                 </div>
             
             </div>
-            </div>
-        </div>
     </table>
-    
     </div>
+
 </template>
 
 <script>
 import store from '../../store'
 export default{
     name: 'TableItem',
-    // props:[
-    //     'table',
+    props:[
+        'table',
         
-    // ],
+    ],
     created(){
         // store.commit('initTable');
         const localDataTable = localStorage.getItem('table');
@@ -79,26 +66,19 @@ export default{
         }
     },
     methods: {
-        onInput : function(index, val){
-                console.log('cccccc');
-                store.commit('setTableRow',{index, val});
-        },
-        onSelect: function(key){
-            console.log('ccc')
-            store.commit('onSelect',key);
-        }
+
     },
     computed:{
         
-        table(){
+        // tableList(){
             
-            if(store.state.tableList.length === 0){
-                console.log('ccd')
-                store.commit('addTable');
-            }
-            
-            return store.state.tableList;
-        },
+        //     if(store.state.tableList.length === 0){
+        //         console.log('ccd')
+        //         store.commit('addTable');
+        //     }
+        //     console.log('ccd-1')
+        //     return store.state.tableList;
+        // },
 
     }
 }
