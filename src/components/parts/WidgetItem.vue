@@ -31,12 +31,54 @@
             </template>
             <template 
                 v-if="widget.type == 'table'">
-                    <TableItem
-                        @inputCell_Th_Front="table.rows.table_cells.table_type_th_front = $event"
-                        @inputCell_Th_Back="table.rows.table_cells.table_type_th_back = $event"
-                        @inputCell_Td_Front="table.rows.table_cells.table_type_td_front = $event"
-                        @inputCell_Td_Back="table.rows.table_cells.table_type_td_back = $event"
-                    />
+                    <table>    
+                        <div class="table-wrapper" v-for="table in widget.tableList" :key = "table.id">
+                            <div v-for="list in table.rows" :key = "list.id">
+                                <div v-for="cell in list.table_cells" :key = "cell.id"  class="table-wrapper">
+                                        <div class="cellinput-wrapper">
+                                            <th>
+                                                <template>
+                                                    <input 
+                                                        v-bind:cell_type_th_front="cell.cell_type_th_front"
+                                                        @input="$emit('inputCell_Th_Front',$event.target.value)"
+                                                        class="headerInput"
+                                                        >
+                                                </template>
+                                            </th>
+                                            <td class="cellinput">
+                                                <template>
+                                                    <input 
+                                                        v-bind:cell_type_td_front="cell.cell_type_td_front"
+                                                        @input="$emit('inputCell_Td_Front',$event.target.value)"
+                                                        class="cellinputText" 
+                                                    >
+                                                </template>
+                                            </td>   
+                                        </div>
+                                        <div class="cellinput-wrapper">
+                                            <th>
+                                                <template>
+                                                    <input 
+                                                        v-bind:cell_type_th_back="cell.cell_type_th_back"
+                                                        @input="$emit('inputCell_Th_Back',$event.target.value)"
+                                                        class="headerInput" 
+                                                    >
+                                                </template>
+                                            </th>
+                                            <td class="cellinput">
+                                                <template>
+                                                    <input 
+                                                        v-bind:cell_type_td_back="cell.cell_type_td_back"
+                                                        @input="$emit('inputCell_Td_Back',$event.target.value)"
+                                                        class="cellinputText" 
+                                                    >
+                                                </template>
+                                            </td>
+                                        </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </table>
             </template>
             <template v-if="widget.type == 'image'">
                 <div class="upload">
@@ -60,7 +102,7 @@
                         <a class="dropdown-item" @click="$emit('typeWidget','heading')">見出し</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','code')">ソースコード</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','body')">本文</a>
-                        <a class="dropdown-item" @click="$emit('typeWidget','table')">テーブル</a>
+                        <a class="dropdown-item" @click="$emit('typeWidget','table'); onAddTable(widget)">テーブル</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','image')">写真</a>
                     </div>
                 </div> 
@@ -93,18 +135,14 @@ import FilePreview from './FilePreview.vue'
 import store from '../../store'
 export default{
     name: 'WidgetItem',
-    data(){
-        return {
-            tableList:[]
-        }
-    },
     props:[
         'widget',
         'parentWidget',
         'layer',
+        'table'
     ],
     components: {
-        TableItem,
+        // TableItem,
         FilePreview,
     },
     methods: {
@@ -154,25 +192,9 @@ export default{
                 store.commit('updateFilePreview',imageData);
             }
         },
-        onAddTableCommon(tableList){
-            const table = {
-                id : new Date().getTime().toString(16) + new Date().getSeconds().toString(16),
-                rows: [
-                    {
-                        table_cells:[
-                            {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                            // {cell_type_th_front: '',cell_type_th_back: '',cell_type_td_front: '',cell_type_td_back: ''},
-                        
-                        ]
-
-                    },
-                ],
-                selected: false,
-            }
-
-            tableList.push(table);
+        onAddTable: function(widget){
+            console.log(widget)
+            this.$emit('addTable',widget);
         }
     },
     watch: {
@@ -236,6 +258,42 @@ export default{
 }
 .child-widget {
   padding-left: 10px;
+}
+
+table{
+    width: 100%;
+    td{
+        width: 60%;
+        border: thin solid rgba(195, 182, 182, 0.12);
+    }
+    th{
+        width: 40%;
+        background: #ccc;
+        border: thin solid rgba(195, 182, 182, 0.12);
+    }
+    .table-wrapper{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    .cellinput{
+        border: none;
+        width: 100%;
+    }
+    .cellinput-wrapper{
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        height: 30px;
+        border: thin solid rgba(0,0,0,0.12);
+    }
+    .headerInput{
+        border: none;
+        background: rgba(195, 182, 182, 0.12);
+    }
+    input.cellinputText{
+        width: 100%;
+    }
 }
 
 @media print{

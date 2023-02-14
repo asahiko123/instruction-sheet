@@ -38,12 +38,18 @@
                             v-bind:key="widget.id"
                             v-bind:widget="widget"
                             v-bind:layer="1"
+                            v-bind:tableList = "widget.tableList"
+                            @addTable="onAddTable"
                             @delete="onDeleteWidget"
                             @addChild="onAddChildWidget"
                             @addWidgetAfter="onAddWidgetAfter"
                             @inputWidget=" widget.text = $event"
                             @mouseover= "widget.mouseover = $event"
-                            @typeWidget=" widget.type = $event">   
+                            @typeWidget=" widget.type = $event"
+                            @inputCell_Th_Front="widget.tableList.rows.table_cells[0].cell_type_th_front = $event"
+                            @inputCell_Td_Front="widget.tableList.rows.table_cells[0].cell_type_td_front = $event"
+                            @inputCell_Th_Back="widget.tableList.rows.table_cells[0].cell_type_th_back = $event"
+                            @inputCell_Td_Back="widget.tableList.rows.table_cells[0].cell_type_td_back = $event">   
                         </WidgetItem>
                     </draggable>
                     
@@ -164,6 +170,7 @@ export default {
                 mouseover: false,
                 children: [],
                 layer: layer,
+                tableList:[],
             };
 
             if(index == null){
@@ -218,6 +225,32 @@ export default {
             });
             
         },
+        onAddTable: function(widget){
+            console.log(widget)
+            this.onAddTableCommon(widget.tableList);
+        },
+
+        onAddTableCommon: function(targetList){
+            console.log('addTable')
+            const table = {
+                id : new Date().getTime().toString(16) + new Date().getSeconds().toString(16),
+                rows: [
+                    {
+                        table_cells:[
+                            {cell_type_th_front: '',cell_type_td_front: '',cell_type_th_back: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_td_front: '',cell_type_th_back: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_td_front: '',cell_type_th_back: '',cell_type_td_back: ''},
+                            {cell_type_th_front: '',cell_type_td_front: '',cell_type_th_back: '',cell_type_td_back: ''},
+                        
+                        ]
+
+                    },
+                ],
+                selected: false,
+            };
+
+            targetList.push(table);
+        }
         
     },
 
