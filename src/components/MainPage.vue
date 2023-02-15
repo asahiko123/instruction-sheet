@@ -46,10 +46,10 @@
                             @inputWidget=" widget.text = $event"
                             @mouseover= "widget.mouseover = $event"
                             @typeWidget=" widget.type = $event"
-                            @inputCell_Th_Front="widget.tableList.rows.table_cells[0].cell_type_th_front = $event"
-                            @inputCell_Td_Front="widget.tableList.rows.table_cells[0].cell_type_td_front = $event"
-                            @inputCell_Th_Back="widget.tableList.rows.table_cells[0].cell_type_th_back = $event"
-                            @inputCell_Td_Back="widget.tableList.rows.table_cells[0].cell_type_td_back = $event">   
+                            @inputCell_Th_Front="inputCell_Th_Front"
+                            @inputCell_Td_Front="inputCell_Td_Front"
+                            @inputCell_Th_Back="inputCell_Th_Back"
+                            @inputCell_Td_Back="inputCell_Td_Back">   
                         </WidgetItem>
                     </draggable>
                     
@@ -250,7 +250,20 @@ export default {
             };
 
             targetList.push(table);
+        },
+        inputCell_Th_Front: function(eventVal,index){
+            console.log('emit th front:' + eventVal + 'row' + index)
+        },
+        inputCell_Td_Front: function(eventVal){
+            console.log('emit td front:' + eventVal + 'row' + index)
+        },
+        inputCell_Th_Back: function(eventVal){
+            console.log('emit th back' + eventVal + 'row' + index)
+        },
+        inputCell_Td_Back: function(eventVal){
+            console.log('emit td back' + eventVal + 'row' + index);
         }
+
         
     },
 

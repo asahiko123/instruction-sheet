@@ -32,15 +32,15 @@
             <template 
                 v-if="widget.type == 'table'">
                     <table>    
-                        <div class="table-wrapper" v-for="table in widget.tableList" :key = "table.id">
-                            <div v-for="list in table.rows" :key = "list.id">
-                                <div v-for="cell in list.table_cells" :key = "cell.id"  class="table-wrapper">
+                        <div class="table-wrapper" v-for="(table,tableIndex) in widget.tableList" :key = "table.id">
+                            <div v-for="(list,listIndex) in table.rows" :key = "list.id">
+                                <div v-for="(cell,index) in list.table_cells" :key = "cell.id"  class="table-wrapper">
                                         <div class="cellinput-wrapper">
                                             <th>
                                                 <template>
                                                     <input 
                                                         v-bind:cell_type_th_front="cell.cell_type_th_front"
-                                                        @input="$emit('inputCell_Th_Front',$event.target.value)"
+                                                        @input="$emit('inputCell_Th_Front',$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput"
                                                         >
                                                 </template>
@@ -49,7 +49,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:cell_type_td_front="cell.cell_type_td_front"
-                                                        @input="$emit('inputCell_Td_Front',$event.target.value)"
+                                                        @input="$emit('inputCell_Td_Front',$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
                                                 </template>
@@ -60,7 +60,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:cell_type_th_back="cell.cell_type_th_back"
-                                                        @input="$emit('inputCell_Th_Back',$event.target.value)"
+                                                        @input="$emit('inputCell_Th_Back',$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput" 
                                                     >
                                                 </template>
@@ -69,7 +69,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:cell_type_td_back="cell.cell_type_td_back"
-                                                        @input="$emit('inputCell_Td_Back',$event.target.value)"
+                                                        @input="$emit('inputCell_Td_Back',$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
                                                 </template>
@@ -195,7 +195,9 @@ export default{
         onAddTable: function(widget){
             console.log(widget)
             this.$emit('addTable',widget);
-        }
+        },
+        
+
     },
     watch: {
         'widget.text': function(){
