@@ -254,13 +254,13 @@ export default {
         inputCell_Th_Front: function(eventVal,index){
             console.log('emit th front:' + eventVal + 'row' + index)
         },
-        inputCell_Td_Front: function(eventVal){
+        inputCell_Td_Front: function(eventVal,index){
             console.log('emit td front:' + eventVal + 'row' + index)
         },
-        inputCell_Th_Back: function(eventVal){
+        inputCell_Th_Back: function(eventVal,index){
             console.log('emit th back' + eventVal + 'row' + index)
         },
-        inputCell_Td_Back: function(eventVal){
+        inputCell_Td_Back: function(eventVal,index){
             console.log('emit td back' + eventVal + 'row' + index);
         }
 
