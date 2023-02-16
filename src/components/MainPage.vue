@@ -251,17 +251,23 @@ export default {
 
             targetList.push(table);
         },
-        inputCell_Th_Front: function(eventVal,index){
-            console.log('emit th front:' + eventVal + 'row' + index)
+        inputCell_Th_Front: function(widget,eventVal,tableIndex,listIndex,index){
+            console.log('emit th front:' + eventVal + 'row' + index + 'tableIndex' + tableIndex + 'listIndex' + listIndex)
+            widget.tableList[tableIndex].rows[listIndex].table_cells[index].cell_type_th_front = eventVal;
+            
         },
-        inputCell_Td_Front: function(eventVal,index){
-            console.log('emit td front:' + eventVal + 'row' + index)
+        inputCell_Td_Front: function(widget,eventVal,tableIndex,listIndex,index){
+            console.log('emit td front:' + eventVal + 'row' + index + 'tableIndex' + tableIndex + 'listIndex' + listIndex)
+            widget.tableList[tableIndex].rows[listIndex].table_cells[index].cell_type_td_front = eventVal;
         },
-        inputCell_Th_Back: function(eventVal,index){
-            console.log('emit th back' + eventVal + 'row' + index)
+        inputCell_Th_Back: function(widget,eventVal,tableIndex,listIndex,index){
+            console.log('emit th back' + eventVal + 'row' + index + 'tableIndex' + tableIndex + 'listIndex' + listIndex)
+            widget.tableList[tableIndex].rows[listIndex].table_cells[index].cell_type_th_back = eventVal;
         },
-        inputCell_Td_Back: function(eventVal,index){
-            console.log('emit td back' + eventVal + 'row' + index);
+        inputCell_Td_Back: function(widget,eventVal,tableIndex,listIndex,index){
+            console.log('emit td back' + eventVal + 'row' + index + 'tableIndex' + tableIndex + 'listIndex' + listIndex);
+            widget.tableList[tableIndex].rows[listIndex].table_cells[index].cell_type_td_back = eventVal;
+
         }
 
         
