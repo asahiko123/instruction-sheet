@@ -105,8 +105,15 @@
                         <a class="dropdown-item" @click="$emit('typeWidget','heading')">見出し</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','code')">ソースコード</a>
                         <a class="dropdown-item" @click="$emit('typeWidget','body')">本文</a>
-                        <a class="dropdown-item" @click="$emit('typeWidget','table'); onAddTable(widget)">テーブル</a>
-                        <a class="dropdown-item" @click="$emit('typeWidget','image')">写真</a>
+                        <a class="dropdown-item" 
+                            @click="$emit('typeWidget','table'); 
+                            onAddTable(widget)"
+                            v-if="widget.layer < 2"
+                        >テーブル</a>
+                        <a class="dropdown-item" 
+                            @click="$emit('typeWidget','image')"
+                            v-if="widget.layer < 2"
+                        >写真</a>
                     </div>
                 </div> 
             </div>
