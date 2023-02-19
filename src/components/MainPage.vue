@@ -49,7 +49,8 @@
                             @inputCell_Th_Front="inputCell_Th_Front"
                             @inputCell_Td_Front="inputCell_Td_Front"
                             @inputCell_Th_Back="inputCell_Th_Back"
-                            @inputCell_Td_Back="inputCell_Td_Back">   
+                            @inputCell_Td_Back="inputCell_Td_Back"
+                            @upload = "upload">   
                         </WidgetItem>
                     </draggable>
                     
@@ -172,6 +173,7 @@ export default {
                 children: [],
                 layer: layer,
                 tableList:[],
+                image: null,
             };
 
             if(index == null){
@@ -198,22 +200,16 @@ export default {
         },
         onDeleteWidget : function(parentWidget, widget) {
             console.log('aaaa13')
-        const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
-        const index = targetList.indexOf(widget);
-        if(widget.type == "table"){
-            localStorage.removeItem('table');
-            store.commit('removeTable',store.state);
-        }else if(widget.type == 'image'){
-            store.commit('removeFilePreview',store.state);
-        }
-        targetList.splice(index, 1);
+            const targetList = parentWidget == null ? this.selectedNote.widgetList : parentWidget.children;
+            const index = targetList.indexOf(widget);
+            console.log(index);
+            
+            targetList.splice(index, 1);
 
-
-
-        const focusWidget = index === 0 ? parentWidget : targetList[index - 1];
-            if(focusWidget != null){
-                focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
-            }
+            const focusWidget = index === 0 ? parentWidget : targetList[index - 1];
+                if(focusWidget != null){
+                    focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
+                }
         },
         onClickButtonSave: function(){
             console.log('aaaa')
@@ -269,6 +265,19 @@ export default {
             console.log('emit td back' + eventVal + 'row' + index + 'tableIndex' + tableIndex + 'listIndex' + listIndex);
             widget.tableList[tableIndex].rows[listIndex].table_cells[index].cell_type_td_back = eventVal;
 
+        },
+        upload: function(e){
+            console.log('bbbb7')
+            let image = e.target.files[0];
+            let reader = new FileReader();
+            console.log(reader);
+
+            reader.readAsDataURL(image);
+            reader.onload = (e) =>{
+                let imageData = e.target.result;
+                console.log(imageData);
+                widget.image = imageData;
+            }
         }
 
         

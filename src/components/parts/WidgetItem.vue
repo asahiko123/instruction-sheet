@@ -84,9 +84,9 @@
                     </table>
             </template>
             <template v-if="widget.type == 'image'">
-                <div class="upload">
-                    <FilePreview/>
-                    <input type="file" @change="upload"/>
+                <div class="upload">                  
+                        <img :src="widget.image" v-bind:value="widget.image" style="max-width: 100%">                  
+                    <input type="file" @change="upload($event,widget)" />
                 </div>
             </template>
             <div v-show="widget.mouseover" class="widget-action">
@@ -146,7 +146,7 @@ export default{
     ],
     components: {
         // TableItem,
-        FilePreview,
+        // FilePreview,
     },
     methods: {
         onMouseOver : function(){
@@ -182,9 +182,11 @@ export default{
                 textarea.style.height = textarea.scrollHeight + 'px';
             });
         },
-        upload(e){
-            console.log('bbbb7')
-            let image = e.target.files[0];
+        upload(e,widget){
+            console.log(e)
+            // this.$emit('upload',widget,e);
+
+            let image = e.target.files[0]
             let reader = new FileReader();
             console.log(reader);
 
@@ -192,8 +194,12 @@ export default{
             reader.onload = (e) =>{
                 let imageData = e.target.result;
                 console.log(imageData);
-                store.commit('updateFilePreview',imageData);
+                widget.image = imageData;
+                
             }
+
+            
+
         },
         onAddTable: function(widget){
             console.log(widget)
