@@ -84,6 +84,7 @@ export default {
         const localData = localStorage.getItem('noteItem');
 
         if(localData != null){
+            console.log('setItem')
             this.noteList = JSON.parse(localData);
         }
     
@@ -217,7 +218,7 @@ export default {
         onClickButtonSave: function(){
             console.log('aaaa')
             localStorage.setItem('noteItem',JSON.stringify(this.noteList));
-            localStorage.setItem(`table_${store.state.id}`,JSON.stringify(store.state.tableList)); 
+            // localStorage.setItem(`table_${store.state.id}`,JSON.stringify(store.state.tableList)); 
             this.$toasted.show('マニュアルを保存しました',{
                 position: 'top-left',
                 duration: 1000,

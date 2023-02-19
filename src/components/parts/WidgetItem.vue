@@ -42,7 +42,7 @@
                                             <th>
                                                 <template>
                                                     <input 
-                                                        v-bind:cell_type_th_front="cell.cell_type_th_front"
+                                                        v-bind:value="cell.cell_type_th_front"
                                                         @input="$emit('inputCell_Th_Front',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput"
                                                         >
@@ -51,7 +51,7 @@
                                             <td class="cellinput">
                                                 <template>
                                                     <input 
-                                                        v-bind:cell_type_td_front="cell.cell_type_td_front"
+                                                        v-bind:value="cell.cell_type_td_front"
                                                         @input="$emit('inputCell_Td_Front',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
@@ -62,7 +62,7 @@
                                             <th>
                                                 <template>
                                                     <input 
-                                                        v-bind:cell_type_th_back="cell.cell_type_th_back"
+                                                        v-bind:value="cell.cell_type_th_back"
                                                         @input="$emit('inputCell_Th_Back',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput" 
                                                     >
@@ -71,7 +71,7 @@
                                             <td class="cellinput">
                                                 <template>
                                                     <input 
-                                                        v-bind:cell_type_td_back="cell.cell_type_td_back"
+                                                        v-bind:value="cell.cell_type_td_back"
                                                         @input="$emit('inputCell_Td_Back',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
