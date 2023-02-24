@@ -2,7 +2,7 @@
     <div class="navigation-bar">
         <!-- Image and text -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/main">
                 <i class="fa-light fa-file-invoice"></i>
                 お手軽マニュアルメーカー
             </a>
@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-file-alt"></i>ノートリスト</a>
+                        <a class="nav-link" href="/main"><i class="fas fa-file-alt"></i>メインページ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -22,7 +22,7 @@
                             学習用ページ
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">学習1</a></li>
+                            <li><a class="dropdown-item" href="/templates">テンプレート作成</a></li>
                             <li><a class="dropdown-item" href="#">学習2</a></li>
                             <li><a class="dropdown-item" href="#">学習3</a></li>
                         </ul>
