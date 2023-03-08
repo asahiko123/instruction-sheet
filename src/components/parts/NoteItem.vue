@@ -41,6 +41,7 @@
         @editEnd="onEditEnd"
         @addChild="onAddChildNote"
         @input="childNote.name = $event"
+        @mouseover="childNote.mouseover = $event"
         @addNoteOnSameLayer="addNoteOnSameLayer"
         @select = "onSelect"
       />

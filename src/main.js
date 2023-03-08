@@ -19,10 +19,6 @@ const router = new VueRouter({
       component: () => import('./components/MainPage.vue')
     },
     {
-      path: '/templates',
-      component: () => import('./components/pages/TemplateHolder.vue')
-    },
-    {
       path: '/*',
       redirect: '/main'
     }

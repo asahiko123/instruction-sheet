@@ -19,12 +19,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <i class="fas fa-user-graduate"></i>
-                            学習用ページ
+                            テンプレート作成
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/templates">テンプレート作成</a></li>
-                            <li><a class="dropdown-item" href="#">学習2</a></li>
-                            <li><a class="dropdown-item" href="#">学習3</a></li>
+                            <li><a class="dropdown-item" href="#">テンプレート１</a></li>
+                            <li><a class="dropdown-item" href="#">テンプレート２</a></li>
+                            <li><a class="dropdown-item" href="#">テンプレート３</a></li>
                         </ul>
                     </li>
                 </ul>
