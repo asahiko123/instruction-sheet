@@ -5,23 +5,29 @@
             <button class="transparent save" @click="onClickButtonSave">
                 <i class="fas fa-save"></i>内容を保存する
             </button>
-            <NoteItem
-                v-for="note in noteList"
-                v-bind:note="note"
-                v-bind:key="note.id"
-                v-bind:layer="1"
-                @input="note.name= $event"
-                @mouseover="note.mouseover = $event"
-                @delete="onDeleteNote"
-                @addChild="onAddChildNote"
-                @editStart="onEditNoteStart"
-                @editEnd="onEditNoteEnd"
-                @addNoteOnSameLayer="addNoteOnSameLayer"
-                @select="onSelectNote"
+            <draggable v-bind:list="noteList" group="notes">
+                <NoteItem
+                    v-for="note in noteList"
+                    v-bind:note="note"
+                    v-bind:key="note.id"
+                    v-bind:layer="1"
+                    @input="note.name= $event"
+                    @mouseover="note.mouseover = $event"
+                    @delete="onDeleteNote"
+                    @addChild="onAddChildNote"
+                    @editStart="onEditNoteStart"
+                    @editEnd="onEditNoteEnd"
+                    @addNoteOnSameLayer="addNoteOnSameLayer"
+                    @select="onSelectNote"
                 >
-            </NoteItem>
+                </NoteItem>
+            </draggable>
+            
             <button class="transparent" @click="onClickButtonAdd">
                 <i class="fas fa-plus-square"></i>マニュアルを追加する
+            </button>
+            <button class="transparent" @click="onClickTemplateAdd">
+                <i class="fas fa-plus-square"></i>テンプレートを追加する
             </button>
         </div>
         <div class="right-view" @click.self="onEditNoteEnd()">
@@ -91,12 +97,13 @@ export default {
     
     },
     methods: {
-        onAddNoteCommon: function(targetList, layer, index){
+        onAddNoteCommon: function(targetList, layer, type, index){
             console.log('aaaa1')
             layer = layer || 1
             const note = {
                 id: new Date().getTime().toString(16),
-                name : `新規ノート-${layer}-${targetList.length}`,
+                type: type,
+                name : type == 'note' ? `新規ノート-${layer}-${targetList.length}` : `テンプレート-${layer}-${targetList.length}`,
                 children: [],
                 mouseover: false,
                 editing: false,
@@ -117,11 +124,20 @@ export default {
             const targetList = parentNote == null ? this.noteList : parentNote.children;
             const layer = parentNote == null ? 1 : note.layer;
             const index = targetList.indexOf(note);
-            this.onAddNoteCommon(targetList, layer, index);
+            const type = 'note'
+            this.onAddNoteCommon(targetList, layer, type, index);
         },
         onClickButtonAdd: function(){
             console.log('aaaa3')
-            this.onAddNoteCommon(this.noteList);
+            const layer = 1
+            const type = 'note'
+            this.onAddNoteCommon(this.noteList,layer,type);
+        },
+        onClickTemplateAdd: function(){
+            console.log('template')
+            const layer = 1
+            const type = 'template'
+            this.onAddNoteCommon(this.noteList,layer,type)
         },
         onDeleteNote: function(parentNote, note){
             console.log('aaaa4')
