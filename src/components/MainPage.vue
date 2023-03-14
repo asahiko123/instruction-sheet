@@ -23,9 +23,9 @@
                 </NoteItem>
             </draggable>
             
-            <button class="transparent" @click="onClickButtonAdd">
+            <!-- <button class="transparent" @click="onClickButtonAdd">
                 <i class="fas fa-plus-square"></i>マニュアルを追加する
-            </button>
+            </button> -->
             <button class="transparent" @click="onClickTemplateAdd">
                 <i class="fas fa-plus-square"></i>テンプレートを追加する
             </button>
@@ -120,12 +120,18 @@ export default {
             }
         },
         addNoteOnSameLayer: function(parentNote, note){
-            console.log('aaaa2')
-            const targetList = parentNote == null ? this.noteList : parentNote.children;
-            const layer = parentNote == null ? 1 : note.layer;
-            const index = targetList.indexOf(note);
-            const type = 'note'
-            this.onAddNoteCommon(targetList, layer, type, index);
+            console.log('aaaa2',note.id)
+            const cloneObj = JSON.parse(JSON.stringify(note))
+
+            cloneObj.id = new Date().getTime().toString(16) + new Date().getSeconds().toString(16)
+
+            // const targetList = parentNote == null ? this.noteList : parentNote.children;
+            // const layer = parentNote == null ? 1 : note.layer;
+            // const index = targetList.indexOf(note);
+            // const type = 'note'
+            // this.onAddNoteCommon(targetList, layer, type, index);
+            console.log(cloneObj)
+            this.noteList.push(cloneObj)
         },
         onClickButtonAdd: function(){
             console.log('aaaa3')
