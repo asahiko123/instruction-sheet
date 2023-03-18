@@ -10,6 +10,8 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 Vue.use(Toasted);
 
+
+
 const router = new VueRouter({
   mode:'history',
   routes:[

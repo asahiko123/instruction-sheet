@@ -43,6 +43,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:value="cell.cell_type_th_front"
+                                                        v-limit-width style="width: 100%"
                                                         @input="$emit('inputCell_Th_Front',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput"
                                                         >
@@ -52,6 +53,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:value="cell.cell_type_td_front"
+                                                        v-limit-width style="width: 100%"
                                                         @input="$emit('inputCell_Td_Front',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
@@ -63,6 +65,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:value="cell.cell_type_th_back"
+                                                        v-limit-width style="width: 100%"
                                                         @input="$emit('inputCell_Th_Back',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput" 
                                                     >
@@ -72,6 +75,7 @@
                                                 <template>
                                                     <input 
                                                         v-bind:value="cell.cell_type_td_back"
+                                                        v-limit-width style="width: 100%"
                                                         @input="$emit('inputCell_Td_Back',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="cellinputText" 
                                                     >
@@ -143,6 +147,7 @@
 import TableItem from './TableItem.vue'
 import FilePreview from './FilePreview.vue'
 import store from '../../store'
+import limitWidthDirective from '@/directive/limitWidthDirective'
 export default{
     name: 'WidgetItem',
     props:[
@@ -221,10 +226,10 @@ export default{
         },
         
     },
-    computed:{
-        
-    
+    directives: {
+        'limit-width': limitWidthDirective
     }
+    
 }
 
 </script>
@@ -280,12 +285,23 @@ export default{
 
 table{
     width: 100%;
+    input{
+        border:none
+    }
+
+    .headerInput{
+        width: 100%;
+        background: rgba(195, 182, 182, 0.12);
+    }
+    .cellinputText{
+        width: 100%;
+    }
     td{
         width: 60%;
         border: thin solid rgba(195, 182, 182, 0.12);
     }
     th{
-        width: 40%;
+        width: 50%;
         background: #ccc;
         border: thin solid rgba(195, 182, 182, 0.12);
     }
@@ -305,13 +321,7 @@ table{
         height: 30px;
         border: thin solid rgba(0,0,0,0.12);
     }
-    .headerInput{
-        border: none;
-        background: rgba(195, 182, 182, 0.12);
-    }
-    input.cellinputText{
-        width: 100%;
-    }
+
 }
 
 @media print{

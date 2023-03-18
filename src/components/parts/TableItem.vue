@@ -12,7 +12,9 @@
                         <template>
                             <input 
                                 type="text" 
-                                class="headerInput" 
+                                class="ThInput" 
+                                v-limit-width style="width: 10px;"
+                                key="th-input"
                                 @change="onInput(index, $event.target.value)"
                                 v-model="cell.cell_type_th_front"
                                 >
@@ -22,7 +24,9 @@
                         <template>
                             <input 
                                 type="text" 
-                                class="cellinputText" 
+                                class="TdInput" 
+                                key="td-input"
+                                v-limit-width style="width: 10px;"
                                 @change="onInput(index, $event.target.value)"
                                 v-model="cell.cell_type_td_front"
                             >
@@ -37,7 +41,9 @@
                         <template>
                             <input 
                             type="text" 
-                            class="headerInput" 
+                            class="ThInput" 
+                            key="th-input-sub"
+                            v-limit-width style="width: 10px;"
                             @change="onInput(index, $event.target.value)"
                             v-model="cell.cell_type_th_back"
                             >
@@ -47,7 +53,9 @@
                         <template>
                             <input 
                             type="text" 
-                            class="cellinputText" 
+                            class="TdInput" 
+                            key="td-input-sub"
+                            v-limit-width style="width: 10px;"
                             @change="onInput(index, $event.target.value)"
                             v-model="cell.cell_type_td_back"
                             >
@@ -67,6 +75,7 @@
 
 <script>
 import store from '../../store'
+import limitWidthDirective from '../../directive/limitWidthDirective'
 export default{
     name: 'TableItem',
     // props:[
@@ -104,15 +113,16 @@ export default{
             return store.state.tableList;
         },
 
+    },
+    directives:{
+        'limit-width' : limitWidthDirective
     }
 }
 </script>
 
 <style scoped lang="scss">
 
-.table-wrapper{
-    border-collapse: collapse;
-}
+
 
 table{
     width: 100%;
@@ -151,13 +161,15 @@ table{
         box-shadow: none;
         outline: none;
     }
-    input.headerInput{
+
+    input.ThInput{
         font-weight: bold;
         background: rgba(195, 182, 182, 0.12);
-    }
-    input.cellinputText{
-        margin: 0;
-    }
+        }
+    input.TdInput{
+            border: none;
+            margin: 0;
+        }
 }
 
 @media(max-width: 787px){
