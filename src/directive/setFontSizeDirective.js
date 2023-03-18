@@ -4,6 +4,6 @@ export default{
 
     bind(el,bindings,vnode){
         console.log(el)
-       el.style.fontSize = '15px'
+       el.style.fontSize = '5px'
     }
 }

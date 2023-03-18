@@ -31,10 +31,10 @@
             </template>
             <template 
                 v-if="widget.type == 'table'">
-                    <table>    
-                        <div class="table-wrapper" v-for="(table,tableIndex) in widget.tableList" :key = "table.id">
+                    <table> 
+                        <tr class="table-wrapper" v-for="(table,tableIndex) in widget.tableList" :key = "table.id">
                             {{ tableIndex }}
-                            <div v-for="(list,listIndex) in table.rows" :key = "list.id">
+                            <div v-for="(list,listIndex) in table.rows" :key = "list.id" class="table-list">
                                 {{ listIndex }}
                                 <div v-for="(cell,index) in list.table_cells" :key = "cell.id"  class="table-wrapper">
                                     {{ index }}
@@ -59,7 +59,7 @@
                                                         class="cellinputText" 
                                                     >
                                                 </template>
-                                            </td>   
+                                            </td>  
                                         </div>
                                         <div class="cellinput-wrapper">
                                             <th>
@@ -85,7 +85,7 @@
                                         </div>  
                                 </div>
                             </div>
-                        </div>
+                        </tr>   
                     </table>
             </template>
             <template v-if="widget.type == 'image'">
@@ -288,6 +288,7 @@ export default{
 
 table{
     width: 100%;
+    display: block;
     input{
         border:none;
         width: 100%;
@@ -312,7 +313,13 @@ table{
         flex-direction: row;
         width: 100%;
     }
+    .table-list{
+        flex-grow: 1;
+    }
     .cellinput{
+        width: 100%;
+    }
+    .cellinputText{
         width: 100%;
     }
     .cellinput-wrapper{
