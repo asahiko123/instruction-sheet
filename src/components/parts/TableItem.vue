@@ -7,6 +7,7 @@
             <div v-for="cell in list.table_cells" :key="cell.id" class="table-wrapper">
             
                 <div class="cellinput-wrapper">
+                <tr>
                     <th>
                         <template>
                             <input 
@@ -27,9 +28,11 @@
                             >
                         </template>
                     </td>
+                </tr>
                     <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
                 </div>
                 <div class="cellinput-wrapper">
+                <tr>
                     <th>
                         <template>
                             <input 
@@ -40,7 +43,7 @@
                             >
                         </template>
                     </th>
-                    <td class="cellinput">
+                    <td>
                         <template>
                             <input 
                             type="text" 
@@ -51,6 +54,7 @@
                         </template>
                     </td>
                     <!-- <td class="cellinput"><input type="text" class="cellinputText"></td> -->
+                </tr>
                 </div>
             
             </div>
@@ -106,6 +110,10 @@ export default{
 
 <style scoped lang="scss">
 
+.table-wrapper{
+    border-collapse: collapse;
+}
+
 table{
     width: 100%;
     td{
@@ -120,12 +128,10 @@ table{
     .table-wrapper{
         display: flex;
         flex-direction: row;
+        border-collapse: collapse;
         width: 100%;
     }
-    .cellinput{
-        border: none;
-        width: 100%;
-    }
+
     .cellinput-wrapper{
         width: 50%;
         display: flex;
@@ -133,12 +139,38 @@ table{
         height: 30px;
         border: thin solid rgba(0,0,0,0.12);
     }
-    .headerInput{
+    input{
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
         border: none;
+        background: transparent;
+        box-shadow: none;
+        outline: none;
+    }
+    input.headerInput{
+        font-weight: bold;
         background: rgba(195, 182, 182, 0.12);
     }
     input.cellinputText{
-        width: 100%;
+        margin: 0;
     }
+}
+
+@media(max-width: 787px){
+    table{
+        display: block;
+
+        th{
+            display: block;
+        }
+        td{
+            display: block;
+        }
+    }
+
 }
 </style>

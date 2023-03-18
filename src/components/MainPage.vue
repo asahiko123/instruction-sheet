@@ -5,7 +5,7 @@
             <button class="transparent save" @click="onClickButtonSave">
                 <i class="fas fa-save"></i>内容を保存する
             </button>
-            <draggable v-bind:list="noteList" group="notes">
+            <draggable v-bind:list="noteList" group="notes" >
                 <NoteItem
                     v-for="note in noteList"
                     v-bind:note="note"
@@ -300,7 +300,19 @@ export default {
                 console.log(imageData);
                 widget.image = imageData;
             }
-        }
+        },
+        // onDragEnd: function(evt){
+        //     console.log(evt.oldIndex,evt.newIndex)
+
+        //     if(evt.oldIndex === evt.newIndex) return;
+
+        //     const movedItem = this.noteList[evt.oldIndex]
+
+        //     console.log(movedItem)
+
+        //     this.noteList.splice(evt.oldIndex,1)
+        //     this.noteList.splice(evt.newIndex,1,movedItem)
+        // }
 
         
     },
