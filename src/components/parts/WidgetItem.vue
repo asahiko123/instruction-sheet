@@ -44,6 +44,7 @@
                                                     <input 
                                                         v-bind:value="cell.cell_type_th_front"
                                                         v-limit-width style="width: 100%"
+                                                        v-set-font-size
                                                         @input="$emit('inputCell_Th_Front',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput"
                                                         >
@@ -148,6 +149,7 @@ import TableItem from './TableItem.vue'
 import FilePreview from './FilePreview.vue'
 import store from '../../store'
 import limitWidthDirective from '@/directive/limitWidthDirective'
+import setFontSizeDirective from '@/directive/setFontSizeDirective'
 export default{
     name: 'WidgetItem',
     props:[
@@ -227,7 +229,8 @@ export default{
         
     },
     directives: {
-        'limit-width': limitWidthDirective
+        'limit-width': limitWidthDirective,
+        'set-font-size': setFontSizeDirective,
     }
     
 }
@@ -286,16 +289,15 @@ export default{
 table{
     width: 100%;
     input{
-        border:none
+        border:none;
+        width: 100%;
     }
 
     .headerInput{
-        width: 100%;
+        font-weight: bold;
         background: rgba(195, 182, 182, 0.12);
     }
-    .cellinputText{
-        width: 100%;
-    }
+
     td{
         width: 60%;
         border: thin solid rgba(195, 182, 182, 0.12);
@@ -311,7 +313,6 @@ table{
         width: 100%;
     }
     .cellinput{
-        border: none;
         width: 100%;
     }
     .cellinput-wrapper{
