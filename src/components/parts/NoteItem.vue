@@ -30,6 +30,7 @@
         </template> 
     </div>
     <div class="child-note">
+    <draggable :list="note.children" group="childnotes">
       <NoteItem
         v-for="childNote in note.children"
         v-bind:note="childNote"
@@ -45,13 +46,18 @@
         @addNoteOnSameLayer="addNoteOnSameLayer"
         @select = "onSelect"
       />
+    </draggable>
     </div>
 </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 export default {
     name: 'NoteItem',
+    components: {
+        draggable
+    },
     props: [
         'note',
         'parentNote',

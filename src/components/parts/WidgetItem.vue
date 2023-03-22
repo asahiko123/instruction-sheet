@@ -33,9 +33,9 @@
                 v-if="widget.type == 'table'">
                     <table> 
                         <tr class="table-wrapper" v-for="(table,tableIndex) in widget.tableList" :key = "table.id">
-                            {{ tableIndex }}
+                            <!-- {{ tableIndex }} -->
                             <div v-for="(list,listIndex) in table.rows" :key = "list.id" class="table-list">
-                                {{ listIndex }}
+                                <!-- {{ listIndex }} -->
                                 <div v-for="(cell,index) in list.table_cells" :key = "cell.id"  class="table-wrapper">
                                     {{ index }}
                                         <div class="cellinput-wrapper">
@@ -67,6 +67,7 @@
                                                     <input 
                                                         v-bind:value="cell.cell_type_th_back"
                                                         v-limit-width style="width: 100%"
+                                                        v-set-font-size
                                                         @input="$emit('inputCell_Th_Back',widget,$event.target.value,tableIndex,listIndex,index)"
                                                         class="headerInput" 
                                                     >
@@ -243,7 +244,7 @@ export default{
     min-height: 40px;
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: 0px  5px 5px;
     color: rgba(25, 23, 17, 0.6);
 
     .widget-action {
