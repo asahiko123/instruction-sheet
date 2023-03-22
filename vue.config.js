@@ -5,5 +5,8 @@ module.exports = defineConfig({
     watchOptions: {
       poll: true
     }
-  }
+  },
+  outputDir: 'docs',
+  assetsDir: './',
+  publicPath: './'
 })
