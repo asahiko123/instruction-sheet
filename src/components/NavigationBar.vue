@@ -11,7 +11,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarText">
+            <!-- <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/main"><i class="fas fa-file-alt"></i>メインページ</a>
@@ -28,7 +28,7 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </nav>
     </div>
 </template>
