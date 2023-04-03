@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <img :src="file" style="max-width: 100%">
+        <img :src="file" style="max-width: 50%">
     </div>
 </template>
 

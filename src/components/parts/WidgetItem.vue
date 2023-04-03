@@ -91,7 +91,7 @@
             </template>
             <template v-if="widget.type == 'image'">
                 <div class="upload">                  
-                        <img :src="widget.image" v-bind:value="widget.image" style="max-width: 100%">                  
+                    <img :src="widget.image" v-bind:value="widget.image" style="max-width: 50%">                  
                     <input type="file" @change="upload($event,widget)" />
                 </div>
             </template>
@@ -282,6 +282,12 @@ export default{
         -webkit-box-shadow: none;
         box-shadow: none;
     }
+
+    .upload{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .child-widget {
   padding-left: 10px;
@@ -334,8 +340,12 @@ table{
 }
 
 @media print{
-    .widget-action {
-        display: none;
-    }
+    // .widget-action {
+    //     display: none;
+    // }
+
+    // input{
+    //     display: none
+    // }
 }
 </style>
