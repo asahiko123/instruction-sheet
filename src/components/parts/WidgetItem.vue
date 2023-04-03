@@ -114,11 +114,11 @@
                         <a class="dropdown-item" 
                             @click="$emit('typeWidget','table'); 
                             onAddTable(widget)"
-                            v-if="widget.layer < 2"
+                            v-if="widget.layer < 3"
                         >テーブル</a>
                         <a class="dropdown-item" 
                             @click="$emit('typeWidget','image')"
-                            v-if="widget.layer < 2"
+                            v-if="widget.layer < 3"
                         >写真</a>
                     </div>
                 </div> 
