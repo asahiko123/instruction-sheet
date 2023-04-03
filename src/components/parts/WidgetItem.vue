@@ -4,125 +4,14 @@
         @mouseover="onMouseOver"
         @mouseleave="onMouseLeave"
         v-bind:class="{mouseover: widget.mouseover}">
-            <template v-if="widget.type == 'heading'">
-                <input   
-                    v-bind:value="widget.text" @input="$emit('inputWidget',$event.target.value)"
-                    v-bind:ref="'widget-heading-' + widget.id"
-                    class="heading transparent"
-                    placeholder="見出し"
-                />
-            </template>
-            <template v-if="widget.type == 'body'">
-                □<input  
-                    v-bind:value="widget.text" @input="$emit('inputWidget',$event.target.value)" 
-                    v-bind:ref="'widget-body-' + widget.id"
-                    class="body transparent"
-                    placeholder="本文"
-                />
-            </template>
-            <template v-if="widget.type == 'code'">
-                <input
-                    v-bind:value="widget.text" @input="$emit('inputWidget',$event.target.value)" 
-                    v-bind:ref="'widget-code-' + widget.id"
-                    class="code transparent"
-                    rows="1"
-                    placeholder="コード"
-                />
-            </template>
-            <template 
-                v-if="widget.type == 'table'">
-                    <table> 
-                        <tr class="table-wrapper" v-for="(table,tableIndex) in widget.tableList" :key = "table.id">
-                            <!-- {{ tableIndex }} -->
-                            <div v-for="(list,listIndex) in table.rows" :key = "list.id" class="table-list">
-                                <!-- {{ listIndex }} -->
-                                <div v-for="(cell,index) in list.table_cells" :key = "cell.id"  class="table-wrapper">
-                                    {{ index }}
-                                        <div class="cellinput-wrapper">
-                                            <th>
-                                                <template>
-                                                    <input 
-                                                        v-bind:value="cell.cell_type_th_front"
-                                                        v-limit-width style="width: 100%"
-                                                        v-set-font-size
-                                                        @input="$emit('inputCell_Th_Front',widget,$event.target.value,tableIndex,listIndex,index)"
-                                                        class="headerInput"
-                                                        >
-                                                </template>
-                                            </th>
-                                            <td class="cellinput">
-                                                <template>
-                                                    <input 
-                                                        v-bind:value="cell.cell_type_td_front"
-                                                        v-limit-width style="width: 100%"
-                                                        @input="$emit('inputCell_Td_Front',widget,$event.target.value,tableIndex,listIndex,index)"
-                                                        class="cellinputText" 
-                                                    >
-                                                </template>
-                                            </td>  
-                                        </div>
-                                        <div class="cellinput-wrapper">
-                                            <th>
-                                                <template>
-                                                    <input 
-                                                        v-bind:value="cell.cell_type_th_back"
-                                                        v-limit-width style="width: 100%"
-                                                        v-set-font-size
-                                                        @input="$emit('inputCell_Th_Back',widget,$event.target.value,tableIndex,listIndex,index)"
-                                                        class="headerInput" 
-                                                    >
-                                                </template>
-                                            </th>
-                                            <td class="cellinput">
-                                                <template>
-                                                    <input 
-                                                        v-bind:value="cell.cell_type_td_back"
-                                                        v-limit-width style="width: 100%"
-                                                        @input="$emit('inputCell_Td_Back',widget,$event.target.value,tableIndex,listIndex,index)"
-                                                        class="cellinputText" 
-                                                    >
-                                                </template>
-                                            </td>
-                                        </div>  
-                                </div>
-                            </div>
-                        </tr>   
-                    </table>
-            </template>
-            <template v-if="widget.type == 'image'">
-                <div class="upload">                  
-                    <img :src="widget.image" v-bind:value="widget.image" style="max-width: 50%">                  
-                    <input type="file" @change="upload($event,widget)" />
-                </div>
-            </template>
-            <div v-show="widget.mouseover" class="widget-action">
-                <div class="button-icon" @click="onClickChildWidget(widget)">
-                    <i class="fas fa-sitemap"></i>
-                </div>  
-                <div class="button-icon" @click="onClickAddWidgetAfter(parentWidget,widget)">
-                    <i class="fas fa-plus-circle"></i>
-                </div> 
-                <div class="button-icon" @click="onClickDelete(parentWidget,widget)">
-                    <i class="fas fa-trash"></i>
-                </div> 
-                <div class="button-icon">
-                    <i class="fas fa-cog" data-toggle="dropdown"></i>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" @click="$emit('typeWidget','heading')">見出し</a>
-                        <a class="dropdown-item" @click="$emit('typeWidget','code')">ソースコード</a>
-                        <a class="dropdown-item" @click="$emit('typeWidget','body')">本文</a>
-                        <a class="dropdown-item" 
-                            @click="$emit('typeWidget','table'); 
-                            onAddTable(widget)"
-                            v-if="widget.layer < 3"
-                        >テーブル</a>
-                        <a class="dropdown-item" 
-                            @click="$emit('typeWidget','image')"
-                            v-if="widget.layer < 3"
-                        >写真</a>
-                    </div>
-                </div> 
-            </div>
+            <component
+                :is = "getWidgetComponent(widget.type)"
+                :widget = "widget"
+                @input="$emit('inputWidget',$event.target.value)"
+            />
+            <SelectBar
+                :widget = "widget"
+            />
         </div>
 
         <div class="child-widget">
@@ -146,9 +35,12 @@
 </template>
 
 <script>
-import TableItem from './TableItem.vue'
-import FilePreview from './FilePreview.vue'
-import store from '../../store'
+import ImageWidget from './ImageWidget.vue'
+import TableWidget from './TableWidget.vue'
+import HeadingWidget from './HeadingWidget.vue'
+import CodeWidget from './CodeWidget.vue'
+import BodyWidget from './BodyWidget.vue'
+import SelectBar from './SelectBar.vue'
 import limitWidthDirective from '@/directive/limitWidthDirective'
 import setFontSizeDirective from '@/directive/setFontSizeDirective'
 export default{
@@ -160,10 +52,29 @@ export default{
         'table'
     ],
     components: {
-        // TableItem,
-        // FilePreview,
+        ImageWidget,
+        TableWidget,
+        HeadingWidget,
+        CodeWidget,
+        BodyWidget
     },
     methods: {
+        getWidgetComponent(type){
+            switch(type){
+                case "heading":
+                    return "HeadingWidget"
+                case "table":
+                    return "TableWidget"
+                case "body":
+                    return "BodyWidget"
+                case "code":
+                    return "CodeWidget"
+                case "image":
+                    return "ImageWidget"
+                default:
+                    return null
+            }
+        },
         onMouseOver : function(){
             console.log('bbbb1')
             this.$emit('mouseover',true);
@@ -197,25 +108,7 @@ export default{
                 textarea.style.height = textarea.scrollHeight + 'px';
             });
         },
-        upload(e,widget){
-            console.log(e)
-            // this.$emit('upload',widget,e);
-
-            let image = e.target.files[0]
-            let reader = new FileReader();
-            console.log(reader);
-
-            reader.readAsDataURL(image);
-            reader.onload = (e) =>{
-                let imageData = e.target.result;
-                console.log(imageData);
-                widget.image = imageData;
-                
-            }
-
-            
-
-        },
+        
         onAddTable: function(widget){
             console.log(widget)
             this.$emit('addTable',widget);
