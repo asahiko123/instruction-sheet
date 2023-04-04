@@ -64,4 +64,10 @@
         margin-left: 3px;
         border-radius: 5px;
     }
+
+    @media print{
+        .widget-action{
+            display: none;
+        }
+    }
 </style>
