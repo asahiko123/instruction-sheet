@@ -51,3 +51,17 @@
         }
     }
 </script>
+
+<style scoped >
+    .widget-action {
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
+    }
+
+    .widget-action .button-icon{
+        padding: 3px;
+        margin-left: 3px;
+        border-radius: 5px;
+    }
+</style>

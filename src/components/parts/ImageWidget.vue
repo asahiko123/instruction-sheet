@@ -1,7 +1,7 @@
 <template>
     <div class="upload">                  
         <img :src="widget.image" v-bind:value="widget.image" style="max-width: 50%">                  
-        <input type="file" @change="upload($event,widget)" />
+        <input type="file" class="fileInput" @change="upload($event,widget)" />
     </div>
 </template>
 
@@ -33,5 +33,13 @@ export default{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media print{
+    .fileInput {
+        display: none;
+    }
 }
+}
+
+
 </style>

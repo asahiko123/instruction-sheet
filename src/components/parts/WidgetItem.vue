@@ -56,7 +56,8 @@ export default{
         TableWidget,
         HeadingWidget,
         CodeWidget,
-        BodyWidget
+        BodyWidget,
+        SelectBar
     },
     methods: {
         getWidgetComponent(type){
@@ -140,47 +141,7 @@ export default{
     padding: 0px  5px 5px;
     color: rgba(25, 23, 17, 0.6);
 
-    .widget-action {
-        display: flex;
-        flex-direction: row;
-        cursor: pointer;
-        .button-icon {
-        padding: 3px;
-        margin-left: 3px;
-        border-radius: 5px;
-        }
-    }
-    input.heading {
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: 1.5px solid #e0e0e0;
-    }
-    input.body {
-        font-size: 16px;
-    }
-    .code {
-        width: calc(100% - 120px);
-        height: 35px;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 8px;
-        color: #f8f8f2;
-        background: #282a36;
-        font-size: 14px;
-        font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
-        resize: none;
-    }
-    .code:focus {
-        outline: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .upload{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    
 }
 .child-widget {
   padding-left: 10px;
@@ -194,51 +155,6 @@ table{
         width: 100%;
     }
 
-    .headerInput{
-        font-weight: bold;
-        background: rgba(195, 182, 182, 0.12);
-    }
-
-    td{
-        width: 60%;
-        border: thin solid rgba(195, 182, 182, 0.12);
-    }
-    th{
-        width: 50%;
-        background: #ccc;
-        border: thin solid rgba(195, 182, 182, 0.12);
-    }
-    .table-wrapper{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
-    .table-list{
-        flex-grow: 1;
-    }
-    .cellinput{
-        width: 100%;
-    }
-    .cellinputText{
-        width: 100%;
-    }
-    .cellinput-wrapper{
-        width: 50%;
-        display: flex;
-        flex-direction: row;
-        height: 30px;
-        border: thin solid rgba(0,0,0,0.12);
-    }
-
-}
-
-@media print{
-    // .widget-action {
-    //     display: none;
-    // }
-
-    // input{
-    //     display: none
-    // }
+    
 }
 </style>
