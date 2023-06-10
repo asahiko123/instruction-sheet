@@ -77,27 +77,27 @@ export default{
             }
         },
         onMouseOver : function(){
-            console.log('bbbb1')
+            
             this.$emit('mouseover',true);
         },
         onMouseLeave : function(){
-            console.log('bbbb2')
+
             this.$emit('mouseover',false);
         },
         onClickDelete : function(parentWidget, widget){
-            console.log('bbbb3')
+
             this.$emit('delete',parentWidget,widget);
         },
         onClickChildWidget: function(widget){
-            console.log('bbbb4')
+
             this.$emit('addChild',widget);
         },
         onClickAddWidgetAfter :function(parentWidget, widget){
-            console.log('bbbb5')
+           
             this.$emit('addWidgetAfter',parentWidget,widget);
         },
         resizeCodeTextarea: function(){
-            console.log('bbbb6')
+           
             if(this.widget.type !== 'code')return;
             const textarea = this.$ref[`widget-code-${this.widget.id}`];
 
