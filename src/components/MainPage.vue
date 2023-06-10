@@ -5,6 +5,10 @@
             <button class="transparent save" @click="onClickButtonSave">
                 <i class="fas fa-save"></i>内容を保存する
             </button>
+            <button v-if="selectedNote" class="transparent save" @click="onClickButtonDownloadXlsx(selectedNote)">
+                <i class="fas fa-file-download"></i>エクセルをダウンロードする
+            </button>
+
             <draggable v-bind:list="noteList" group="notes" >
                 <NoteItem
                     v-for="note in noteList"
@@ -74,6 +78,7 @@ import NoteItem from '@/components/parts/NoteItem.vue'
 import store from '../store'
 import WidgetItem from '@/components/parts/WidgetItem.vue'
 import draggable from 'vuedraggable'
+import { onClickButtonDownloadXlsx } from '../utils/onClickFunction'
 export default {
     
     data(){
@@ -234,7 +239,7 @@ export default {
                 }
         },
         onClickButtonSave: function(){
-            console.log('aaaa')
+            console.log('save')
             localStorage.setItem('noteItem',JSON.stringify(this.noteList));
             // localStorage.setItem(`table_${store.state.id}`,JSON.stringify(store.state.tableList)); 
             this.$toasted.show('マニュアルを保存しました',{
@@ -243,6 +248,10 @@ export default {
                 type: 'success'
             });
             
+        },
+        onClickButtonDownloadXlsx: function(targetNote){
+            onClickButtonDownloadXlsx(targetNote)
+
         },
         onAddTable: function(widget){
             console.log(widget)
